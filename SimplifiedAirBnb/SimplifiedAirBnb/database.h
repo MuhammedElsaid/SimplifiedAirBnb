@@ -9,7 +9,7 @@ class DataItem : public std::map<std::string, std::string>
 	void AddField(std::string key, std::string value);
 };
 
-class Dataset
+class DataSet
 {
 public:
 	//Saving the dataset
@@ -17,7 +17,7 @@ public:
 	void Push(DataItem* dataItem);
 	
 	//Loading data set from the path
-	Dataset(std::string path);
+	DataSet(std::string path);
 
 private:
 	std::string path;

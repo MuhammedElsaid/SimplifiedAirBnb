@@ -3,7 +3,7 @@
 #include <fstream>
 #include <windows.h>
 
-void Dataset::Save()
+void DataSet::Save()
 {
 	std::ofstream fileStream;
 	fileStream.open(path, std::ofstream::out | std::ofstream::trunc);
@@ -21,7 +21,7 @@ void Dataset::Save()
 	fileStream.close();
 }
 
-Dataset::Dataset(std::string path)
+DataSet::DataSet(std::string path)
 {
 	this->path = path;
 
@@ -57,7 +57,7 @@ Dataset::Dataset(std::string path)
 	fileStream.close();
 }
 
-void Dataset::Push(DataItem* dataItem)
+void DataSet::Push(DataItem* dataItem)
 {
 	this->items.push_back(dataItem);
 }
