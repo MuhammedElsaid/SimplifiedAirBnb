@@ -127,11 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="database.cpp" />
     <ClCompile Include="host.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="traveler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="database.h" />
     <ClInclude Include="host.h" />
     <ClInclude Include="traveler.h" />
   </ItemGroup>
