@@ -2,6 +2,7 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+/.vs/
 /SimplifiedAirBnb/.vs/SimplifiedAirBnb/v17/Preview
 /SimplifiedAirBnb/.vs/
 /SimplifiedAirBnb/x64/
