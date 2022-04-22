@@ -7,6 +7,6 @@ using namespace std;
 int main()
 {
 	cout << "jj";
-	cout << "heyyyyyy";
+	cout << "heyyyy";
 
 }
