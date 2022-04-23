@@ -7,6 +7,11 @@ using namespace std;
 int main()
 {
 	cout << "jj";
+
 	cout << "mayada";
+
+
+	cout << "heyyyyyy";
+	cout << "hellloooooo";
 
 }
