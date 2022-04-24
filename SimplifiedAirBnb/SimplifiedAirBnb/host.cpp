@@ -1,12 +1,28 @@
 #include "host.h"
+#include "database.h"
 
-void apartment::readdata()
+void Apartment::ReadData()
 {
 	cout << "please enter department details" << endl;
 	cin >> address >> capacity >> no_of_rooms >> price >> startdate >> enddate;
 }
 
-host::host(string fullname, int age, string gender, string nationality)
+const list<Apartment*>& Apartment::getApartments() {
+
+	if (!apartments) {
+
+		DataSet dataset("Apartments.txt");
+
+		for (auto apartmentDataItem : dataset.getItems()) {
+
+			
+		}
+	}
+
+	return *apartments;
+}
+
+Host::Host(string fullname, int age, string gender, string nationality)
 {
 	age = age;
 	fullname = fullname;
@@ -14,7 +30,7 @@ host::host(string fullname, int age, string gender, string nationality)
 	nationality = nationality;
 }
 
-host::host(string fullname, int age, string gender, string nationality, string email, string password)
+Host::Host(string fullname, int age, string gender, string nationality, string email, string password)
 {
 	age = age;
 	fullname = fullname;
@@ -24,16 +40,16 @@ host::host(string fullname, int age, string gender, string nationality, string e
 	password = password;
 }
 
-void host::addplaces()
+void Host::addplaces()
 {
 	int n;
 	cout << "please enter number of appartments available for rents" << endl;
 	cin >> n;
-	apartment a;
 
 	for (int i = 0; i < n; i++) {
-		a.readdata();
+		Apartment* newApartment = new Apartment;
 
-		v1.push_back(a);
+		newApartment->ReadData();
+		apartments.push_back(newApartment);
 	}
 }

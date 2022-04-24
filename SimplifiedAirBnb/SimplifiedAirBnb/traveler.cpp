@@ -5,14 +5,7 @@
 
 using namespace std;
 
-Traveler::Traveler() {
-	Email = "";
-	password = "";
-	city = " ";
-	Sday = 0; Eday = 0; Smon = 0; Emon = 0; Syear = 0; Eyear = 0;
-	duration = 0;
-	Hprice = 0.0; Lprice = 0.0; price = 0.0; priceperday = 0.0;
-};
+
 void Traveler::Search() {
 	cout << "Enter Highest Price: "; cin >> Hprice;
 	cout << "Enter Lowest Price: "; cin >> Lprice;

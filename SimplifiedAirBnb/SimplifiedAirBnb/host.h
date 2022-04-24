@@ -1,37 +1,46 @@
 #pragma once
 
 #include <iostream>
-using namespace std;
 #include <stack>
-#include<list>
-#include<vector>
-class apartment {
+#include <list>
+#include <vector>
+
+using namespace std;
+
+class Apartment {
+
 public:
+	void ReadData();
+
+	int getPrice();
+
+	static const list<Apartment*>& getApartments();
+
+private:
+	static list<Apartment*>* apartments;
+
 	string address;
-	float capacity;
+	double capacity;
 	int no_of_rooms;
-	int price;
+	double price;
 	string startdate;
 	string enddate;
-	void readdata();
 };
 
-
-
-
-class host {
+class Host {
 private:
-	vector<apartment>v1;
+	vector<Apartment*> apartments;
 	string fullname;
 	int age;
 	string gender;
 	string nationality;
 	string email;
 	string password;
+
 public:
-	host(string fullname, int age, string gender, string nationality);
-	host(string fullname, int age, string gender, string nationality, string email, string password);
-	host();
+	Host(string fullname, int age, string gender, string nationality);
+	Host(string fullname, int age, string gender, string nationality, string email, string password);
+	Host();
 	//login
 	void addplaces();
 
