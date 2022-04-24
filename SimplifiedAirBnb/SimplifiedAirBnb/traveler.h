@@ -7,7 +7,5 @@ public:
 	string Email;
 	string password;
 	travelers();
-	bool LogIn();
-	string signup();
 
 };

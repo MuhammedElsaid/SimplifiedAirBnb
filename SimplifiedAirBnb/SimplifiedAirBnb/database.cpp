@@ -21,17 +21,6 @@ void DataSet::Save()
 	fileStream.close();
 }
 
-string DataSet::getItem(std::string key)
-{
-	MAP::const_iterator pos = map.find("string");
-	if (pos == map.end()) {
-	    //handle the error
-	} else {
-	    std::string value = pos->second;
-	}
-
-}
-
 DataSet::DataSet(std::string path)
 {
 	this->path = path;
@@ -66,6 +55,28 @@ DataSet::DataSet(std::string path)
 	}
 
 	fileStream.close();
+}
+
+DataItem* DataSet::searchForDataItem(DataItem* dataItem) {
+
+	DataItem* currentDataItem = nullptr;
+
+	for (auto dataValue : items) {
+		for (auto dataItemValues : *dataItem) {
+
+			currentDataItem = dataValue;
+			if (dataValue->at(dataItemValues.first) != dataItemValues.second) {
+				currentDataItem = nullptr;
+				break;
+			}
+		}
+	}
+
+	return currentDataItem;
+}
+
+const std::list<DataItem*>& DataSet::getItems() {
+	return items;
 }
 
 void DataSet::Push(DataItem* dataItem)
