@@ -1,46 +1,46 @@
 #include "traveler.h"
 #include<iostream>
 #include<conio.h>
+#include "database.h"  
 
 using namespace std;
 
 travelers::travelers() {
-	Email = "\0";
-	password = "\0";
+	Email = "";
+	password = "";
 };
 
-bool travelers::LogIn() {
-	string mail = "mayadazain";
-	string password1 = "2020";
+
+bool LogIn() {
+	DataSet dataset("Users.txt");
+
+	auto savedEmail = dataset.items["email"];
+	auto savedPassword = dataset.items["password"];
+
+	string email;
+	string password;
+
 	char ch;
 	cout << "Enter your Email/UserName:" << endl;
-	cin >> Email;
+	cin >> email;
 	cout << "Enter your Password:" << endl;
+
 	ch = _getch();
 	while (ch != 13) {
-		password.push_back(ch);
+		password += ch;
 		cout << '*';
 
 		ch = _getch();
-
 	}
 
-
-
-	if (Email == mail && password == password1) {
-		return true;
-	}
-	else {
-		return false;
-	}
-
+	return email == savedEmail && password == savedPassword;
 };
 
 
 
 
 
-string travelers::signup() {
+string signup() {
 	string FullName;
 	string Email;
 	string Password;
@@ -49,18 +49,29 @@ string travelers::signup() {
 	string nationality;
 	int age;
 
+	DataSet dataset("Users.txt");
+
+	DataItem* dataItem = new DataItem;
+	dataset.Push(dataItem);
 
 	cout << "Enter your name :" << endl;
 	cin >> FullName;
+	dataItem.AddField("name", FullName);
 	cout << "Enter your email :" << endl;
 	cin >> Email;
 	cout << "Enter your Password :" << endl;
+	dataItem.AddField("email", Email);
+
 	cin >> Password;
 	cout << "Enter the password again :" << endl;
 	cin >> repassword;
 	while (Password != repassword) {
-		cout << "Success !" << endl;
-		cout << "Welcome To AirBNB" << endl;
+		cout << "The two password doen't match" << endl;
+
+		cout << "Enter your Password :" << endl;
+		cin >> Password;
+		cout << "Enter the password again :" << endl;
+		cin >> repassword;
 	}
 	cout << "Enter your gender:" << endl;
 	cin >> gender;
@@ -68,6 +79,8 @@ string travelers::signup() {
 	cin >> nationality;
 	cout << "Enter your age:" << endl;
 	cin >> age;
+
+	dataset.Save();
 	return 0;
 };
 
@@ -75,19 +88,18 @@ string travelers::signup() {
 
 
 int main() {
-	bool LogIn();
-	int signup();
+	
 	int op;
 
 	cout << "press 1 for signup" << endl;
 	cout << "press 2 for login" << endl;
 	cin >> op;
 	if (op == 1) {
-		string signup();
+		signup();
 
 	}
 	else {
-		void LogIn();
+		 LogIn();
 
 	}
 	travelers T1;

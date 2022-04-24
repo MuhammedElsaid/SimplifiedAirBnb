@@ -7,6 +7,7 @@ class DataItem : public std::map<std::string, std::string>
 {
 	public:
 	void AddField(std::string key, std::string value);
+	string getItem(std::string key);
 };
 
 class DataSet

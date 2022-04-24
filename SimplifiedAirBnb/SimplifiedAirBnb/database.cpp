@@ -21,6 +21,17 @@ void DataSet::Save()
 	fileStream.close();
 }
 
+string DataSet::getItem(std::string key)
+{
+	MAP::const_iterator pos = map.find("string");
+	if (pos == map.end()) {
+	    //handle the error
+	} else {
+	    std::string value = pos->second;
+	}
+
+}
+
 DataSet::DataSet(std::string path)
 {
 	this->path = path;
