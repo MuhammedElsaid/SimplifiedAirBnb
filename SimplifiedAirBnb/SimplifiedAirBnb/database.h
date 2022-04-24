@@ -18,6 +18,9 @@ public:
 	
 	//Loading data set from the path
 	DataSet(std::string path);
+	DataItem* searchForDataItem(DataItem* dataItem);
+
+	const std::list<DataItem*>& getItems();
 
 private:
 	std::string path;

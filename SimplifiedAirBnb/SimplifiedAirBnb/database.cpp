@@ -57,6 +57,28 @@ DataSet::DataSet(std::string path)
 	fileStream.close();
 }
 
+DataItem* DataSet::searchForDataItem(DataItem* dataItem) {
+
+	DataItem* currentDataItem = nullptr;
+
+	for (auto dataValue : items) {
+		for (auto dataItemValues : *dataItem) {
+
+			currentDataItem = dataValue;
+			if (dataValue->at(dataItemValues.first) != dataItemValues.second) {
+				currentDataItem = nullptr;
+				break;
+			}
+		}
+	}
+
+	return currentDataItem;
+}
+
+const std::list<DataItem*>& DataSet::getItems() {
+	return items;
+}
+
 void DataSet::Push(DataItem* dataItem)
 {
 	this->items.push_back(dataItem);

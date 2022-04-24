@@ -1,0 +1,7 @@
+age=20
+email=mohammed@example.com
+gender=male
+name=Muhammed
+nationality=egyptian
+password=pass
+-
