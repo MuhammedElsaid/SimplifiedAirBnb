@@ -108,5 +108,22 @@ void signup() {
 
 int main()
 {
-	LogIn();
+	int input = 0;
+
+	cout << "Enter 1 for loggin in\nEnter 2 for signing up\n";
+
+	while (true) {
+		cin >> input;
+
+		if (input == 1) {
+			LogIn();
+			break;
+		}
+		else if (input == 2) {
+			signup();
+			break;
+		}
+		else
+			cout << "Invalid output\n";
+	}
 }
