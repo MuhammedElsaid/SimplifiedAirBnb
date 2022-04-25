@@ -46,9 +46,6 @@ bool LogIn() {
 };
 
 
-
-
-
 void signup() {
 
 	string FullName;
