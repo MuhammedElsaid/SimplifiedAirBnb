@@ -9,6 +9,8 @@ class BookedApartment
 {
 public:
 	void CalculateTotalPrice();
+	static const list<Apartment*>& searchByPrice(double givenPrice);
+	static const list<Apartment*>& searchByCity(string givenCity);
 
 private:
 	Apartment* apartment;

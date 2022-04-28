@@ -13,13 +13,15 @@ public:
 	void ReadData();
 
 	int getPrice();
-
+	static const list<Apartment*>& searchByPrice(double givenPrice);
+	static const list<Apartment*>& searchByCity(string givenCity);
 	static const list<Apartment*>& getApartments();
 
 private:
 	static list<Apartment*>* apartments;
 
 	string address;
+	string city;
 	double capacity;
 	int no_of_rooms;
 	double price;

@@ -4,7 +4,12 @@
 void Apartment::ReadData()
 {
 	cout << "please enter department details" << endl;
-	cin >> address >> capacity >> no_of_rooms >> price >> startdate >> enddate;
+	cin >> address >> capacity >> no_of_rooms >> price >> startdate >> enddate>>city;
+}
+
+int Apartment::getPrice()
+{
+	return price;
 }
 
 const list<Apartment*>& Apartment::getApartments() {

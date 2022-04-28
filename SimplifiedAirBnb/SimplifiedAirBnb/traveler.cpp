@@ -2,6 +2,8 @@
 #include<iostream>
 #include<conio.h>
 #include "database.h"  
+#include "host.h"
+#include"host.cpp"
 
 using namespace std;
 
@@ -31,7 +33,7 @@ void Traveler::RemoveDup() {};
 
 double Traveler::CalcTotalPrice(double priceperday) {
 	//priceperday is the apartment price per day
-	price = priceperday * duration;
+	price =  * duration;
 	return price;
 };
 
@@ -66,3 +68,31 @@ void Traveler::PriceSearch(double hp,double lp) {
 };
 
 Traveler::~Traveler(void) {};
+
+void BookedApartment::CalculateTotalPrice()
+{
+	apartment->getPrice();
+}
+
+const list <Apartment*>&
+Apartment::searchByPrice(double givenPrice) {
+
+	list<Apartment*> foundResults;
+	for (auto apartment : getApartments()) {
+		if (apartment->price <= givenPrice)
+			foundResults.push_back(apartment);
+	}
+
+	return foundResults;
+}
+const list<Apartment*>& Apartment::searchByCity(string givenCity) {
+	list<Apartment*> foundResults;
+	for (auto apartment : getApartments()) {
+		if (apartment->city == givenCity)
+			foundResults.push_back(apartment);
+	}
+
+	return foundResults;
+}
+
+
