@@ -8,6 +8,6 @@ using namespace AirbnbGUI;
 void main(array<String^>^ args) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-	SigninForm form;
+	SigninForm form; 
 	Application::Run(%form); 
 }
