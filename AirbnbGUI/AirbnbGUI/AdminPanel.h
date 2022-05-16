@@ -1,4 +1,7 @@
 #pragma once
+#include "DataSets.h"
+#include "User.h"
+#include "Admin.h"
 
 namespace AirbnbGUI {
 
@@ -21,6 +24,15 @@ namespace AirbnbGUI {
 			//
 			//TODO: Add the constructor code here
 			//
+
+			auto userDataSource = gcnew System::ComponentModel::BindingList<UserDataCell^>();
+
+			for (auto user : Global::Users->loadValues()) {
+
+				userDataSource->Add(gcnew UserDataCell(user));
+			}
+
+			userDataGrid->DataSource = userDataSource;
 		}
 
 	protected:
@@ -38,12 +50,14 @@ namespace AirbnbGUI {
 		protected:
 		private: System::Windows::Forms::TabPage^ tabPage4;
 		private: System::Windows::Forms::TabPage^ tabPage1;
-		private: System::Windows::Forms::DataGridView^ dataGridView1;
+		private: System::Windows::Forms::DataGridView^ userDataGrid;
+
 		private: System::Windows::Forms::TabPage^ tabPage2;
 		private: System::Windows::Forms::DataGridView^ dataGridView2;
 		private: System::Windows::Forms::TabPage^ tabPage3;
 		private: System::Windows::Forms::DataGridView^ dataGridView3;
 		private: System::Windows::Forms::Button^ button1;
+		private: System::Windows::Forms::Button^ button3;
 
 	private:
 		/// <summary>
@@ -59,20 +73,21 @@ namespace AirbnbGUI {
 		void InitializeComponent(void)
 		{
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
+			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->userDataGrid = (gcnew System::Windows::Forms::DataGridView());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
-			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
-			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
+			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
 			this->dataGridView3 = (gcnew System::Windows::Forms::DataGridView());
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->userDataGrid))->BeginInit();
 			this->tabPage2->SuspendLayout();
-			this->tabPage3->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
+			this->tabPage3->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView3))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -88,9 +103,20 @@ namespace AirbnbGUI {
 			this->tabControl1->Size = System::Drawing::Size(801, 632);
 			this->tabControl1->TabIndex = 0;
 			// 
+			// tabPage4
+			// 
+			this->tabPage4->Location = System::Drawing::Point(4, 25);
+			this->tabPage4->Name = L"tabPage4";
+			this->tabPage4->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage4->Size = System::Drawing::Size(793, 603);
+			this->tabPage4->TabIndex = 3;
+			this->tabPage4->Text = L"Analysis";
+			this->tabPage4->UseVisualStyleBackColor = true;
+			// 
 			// tabPage1
 			// 
-			this->tabPage1->Controls->Add(this->dataGridView1);
+			this->tabPage1->Controls->Add(this->button3);
+			this->tabPage1->Controls->Add(this->userDataGrid);
 			this->tabPage1->Location = System::Drawing::Point(4, 25);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
@@ -98,6 +124,26 @@ namespace AirbnbGUI {
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Users";
 			this->tabPage1->UseVisualStyleBackColor = true;
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(6, 567);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(126, 33);
+			this->button3->TabIndex = 2;
+			this->button3->Text = L"Delete";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &AdminPanel::button3_Click);
+			// 
+			// userDataGrid
+			// 
+			this->userDataGrid->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->userDataGrid->Location = System::Drawing::Point(0, 0);
+			this->userDataGrid->Name = L"userDataGrid";
+			this->userDataGrid->RowHeadersWidth = 51;
+			this->userDataGrid->RowTemplate->Height = 24;
+			this->userDataGrid->Size = System::Drawing::Size(793, 561);
+			this->userDataGrid->TabIndex = 0;
 			// 
 			// tabPage2
 			// 
@@ -110,6 +156,16 @@ namespace AirbnbGUI {
 			this->tabPage2->Text = L"Apartments";
 			this->tabPage2->UseVisualStyleBackColor = true;
 			// 
+			// dataGridView2
+			// 
+			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView2->Location = System::Drawing::Point(0, 0);
+			this->dataGridView2->Name = L"dataGridView2";
+			this->dataGridView2->RowHeadersWidth = 51;
+			this->dataGridView2->RowTemplate->Height = 24;
+			this->dataGridView2->Size = System::Drawing::Size(793, 639);
+			this->dataGridView2->TabIndex = 0;
+			// 
 			// tabPage3
 			// 
 			this->tabPage3->Controls->Add(this->dataGridView3);
@@ -120,26 +176,6 @@ namespace AirbnbGUI {
 			this->tabPage3->TabIndex = 2;
 			this->tabPage3->Text = L"Booked Apartments";
 			this->tabPage3->UseVisualStyleBackColor = true;
-			// 
-			// dataGridView1
-			// 
-			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(0, 0);
-			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->RowHeadersWidth = 51;
-			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(793, 639);
-			this->dataGridView1->TabIndex = 0;
-			// 
-			// dataGridView2
-			// 
-			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView2->Location = System::Drawing::Point(0, 0);
-			this->dataGridView2->Name = L"dataGridView2";
-			this->dataGridView2->RowHeadersWidth = 51;
-			this->dataGridView2->RowTemplate->Height = 24;
-			this->dataGridView2->Size = System::Drawing::Size(793, 639);
-			this->dataGridView2->TabIndex = 0;
 			// 
 			// dataGridView3
 			// 
@@ -159,16 +195,7 @@ namespace AirbnbGUI {
 			this->button1->TabIndex = 1;
 			this->button1->Text = L"Save";
 			this->button1->UseVisualStyleBackColor = true;
-			// 
-			// tabPage4
-			// 
-			this->tabPage4->Location = System::Drawing::Point(4, 25);
-			this->tabPage4->Name = L"tabPage4";
-			this->tabPage4->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage4->Size = System::Drawing::Size(793, 603);
-			this->tabPage4->TabIndex = 3;
-			this->tabPage4->Text = L"Analysis";
-			this->tabPage4->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &AdminPanel::button1_Click);
 			// 
 			// AdminPanel
 			// 
@@ -181,14 +208,35 @@ namespace AirbnbGUI {
 			this->Text = L"AdminPanel";
 			this->tabControl1->ResumeLayout(false);
 			this->tabPage1->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->userDataGrid))->EndInit();
 			this->tabPage2->ResumeLayout(false);
-			this->tabPage3->ResumeLayout(false);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
+			this->tabPage3->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView3))->EndInit();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
-	};
+		private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+
+			auto selectedRows = userDataGrid->SelectedRows;
+			
+			auto enumerator = selectedRows->GetEnumerator();
+
+
+			while (enumerator->MoveNext()) {
+
+				DataGridViewRow^ row = (DataGridViewRow^)enumerator->Current;
+
+				auto userDataCell = (UserDataCell^)row->DataBoundItem;
+				userDataCell->Remove();
+
+				userDataGrid->Rows->Remove(row);
+			}
+		}
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		Global::Users->Save();
+	}
+};
 }

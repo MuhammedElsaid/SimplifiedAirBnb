@@ -1,13 +1,5 @@
-Age=16
-Email=mohamed@example.com
-FullName=Muhammed
-Gender=Male
-ID=6
-OwnedApartments=4,
-UserType=1
--
-Age=16
-Email=mohamed@example.com
+Age=15
+Email=mohamed@gmail.com
 FullName=Muhammed
 Gender=Male
 ID=7

@@ -358,7 +358,7 @@ namespace AirbnbGUI {
 				return;
 			}
 
-			for (User* user : Global::Users->getValues()) {
+			for (User* user : *Global::Users->getValues()) {
 				if (user->email == emailStr) {
 					emailTextBox->Focus();
 					System::Windows::Forms::MessageBox::Show("A user with that email already exists!! Try another email.");

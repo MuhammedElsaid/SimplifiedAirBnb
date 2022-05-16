@@ -238,7 +238,7 @@ namespace AirbnbGUI {
 				
 				auto userId = std::stoi(result->at("ID"));
 
-				for (UserKey* key : Global::Keys->getValues()) {
+				for (UserKey* key : *Global::Keys->getValues()) {
 					if (key->userId == userId && key->key == passwordStr)
 						isSignedIn = true;
 				}

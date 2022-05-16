@@ -31,7 +31,7 @@ std::list<BookedApartment*> Apartment::getBookedApartments()
 
 	for (auto bookedId : bookedApartmentsIDs) {
 
-		for (auto bookedApartment : Global::BookedApartments->getValues())
+		for (auto bookedApartment : *Global::BookedApartments->getValues())
 			if (bookedApartment->ID == bookedId)
 				bookedApartments.push_back(bookedApartment);
 	}
@@ -91,7 +91,7 @@ double BookedApartment::CalculateTotalPrice() {
 
 Apartment* BookedApartment::getApartment()
 {
-	for (auto bookedApartment : Global::Apartments->getValues()) {
+	for (auto bookedApartment : *Global::Apartments->getValues()) {
 		if (bookedApartment->ID == apartmentID) {
 			return bookedApartment;
 		}

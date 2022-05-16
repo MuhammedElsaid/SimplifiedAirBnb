@@ -90,8 +90,9 @@ public:
 		return foundItem;
 	}
 
-	const std::list<T*> getValues() {
-		return values;
+	std::list<T*>* getValues() {
+
+		return &values;
 	}
 
 	virtual const std::list<T*> loadValues(){
