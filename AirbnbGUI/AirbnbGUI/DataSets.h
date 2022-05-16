@@ -23,6 +23,7 @@ public:
 
 	const std::list<User*> loadValues() override{
 
+		values.clear();
 		auto readItems = Open();
 
 		for (auto readItem : readItems) {
