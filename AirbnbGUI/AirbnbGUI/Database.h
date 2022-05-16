@@ -92,7 +92,7 @@ public:
 		return values;
 	}
 
-	const std::list<T*> loadValues(){
+	virtual const std::list<T*> loadValues(){
 
 		auto readItems = Open();
 
@@ -110,7 +110,6 @@ protected:
 	std::list<DataItem*> items;
 	std::list<T*> values;
 
-private:
 	std::list<DataItem*> Open() {
 
 		std::ifstream fileStream(path);

@@ -20,6 +20,28 @@ class UsersDataSet : public DataSet<User>
 {
 	public:
 	UsersDataSet() : DataSet("users.txt") {}
+
+	const std::list<User*> loadValues() override{
+
+		auto readItems = Open();
+
+		for (auto readItem : readItems) {
+
+			User* user = nullptr;
+
+			int accountType = std::stoi(readItem->at("UserType"));
+			if (accountType == 0)
+				user = new Traveler(readItem);
+			else if (accountType == 1)
+				user = new Host(readItem);
+			else 
+				user = new Administrator(readItem);
+
+			values.push_back(user);
+		}
+		Close();
+		return values;
+	}
 };
 
 class Global
