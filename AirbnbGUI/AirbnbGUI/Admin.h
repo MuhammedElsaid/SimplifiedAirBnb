@@ -6,37 +6,33 @@ using namespace System;
 using namespace msclr::interop;
 
 #define DefineProperty(name, stName, managedType, standardType, stVar)\
-private: managedType^ f##name;\
 public: property managedType^ name {\
         managedType^ get(){\
-            return f##name;\
+            return gcnew managedType(stVar->stName);\
 }\
 
 #define DefineSet(name, stName, managedType, standardType, stVar)\
 void set(managedType^ value){\
     stVar->stName = marshal_as<standardType>(value);\
-    f##name = value;\
 }}\
 
 #define DefineSetNoMarshal(name, stName, managedType, standardType, stVar)\
 void set(managedType^ value){\
     stVar->stName = System::Convert::To##managedType(value);\
-    f##name = value;\
 }}\
 
 ref class ApartmentDataCell
 {
     public: ApartmentDataCell(Apartment* apartment) {
-
         this->apartment = apartment;
     }
 
     private: Apartment* apartment;
 
-    DefineProperty(Address, address, String, std::string, apartment)
+    DefineProperty(Address, address.c_str(), String, std::string, apartment)
     DefineSet(Address, address, String, std::string, apartment)
 
-    DefineProperty(City, city, String, std::string, apartment)
+    DefineProperty(City, city.c_str(), String, std::string, apartment)
     DefineSet(City, city, String, std::string, apartment)
 
     DefineProperty(NumberOfRooms, availableRooms, Int32, int, apartment)
@@ -57,13 +53,13 @@ ref class UserDataCell
     }
     private: User* user;
 
-    DefineProperty(FullName, fullName, String, std::string, user)
+    DefineProperty(FullName, fullName.c_str(), String, std::string, user)
     DefineSet(FullName, fullName, String, std::string, user)
 
-    DefineProperty(Email, email, String, std::string, user)
+    DefineProperty(Email, email.c_str(), String, std::string, user)
     DefineSet(Email, email, String, std::string, user)
 
-    DefineProperty(Gender, gender, String, std::string, user)
+    DefineProperty(Gender, gender.c_str(), String, std::string, user)
     DefineSet(Gender, gender, String, std::string, user)
 
     DefineProperty(Age, age, Int32, int, user)
@@ -82,12 +78,8 @@ ref class BookedApartmentDataCell
     DefineProperty(ApartmentID, apartmentID, Int32, int, bookedApartment)
     DefineSetNoMarshal(ApartmentID, apartmentID, Int32, int, bookedApartment)
 
-    DefineProperty(StartDate, startDate, String, std::string, bookedApartment)
-    void set(String^ value) {
-        
-        bookedApartment->startDate = DateTime::Parse(value).ToBinary();
-        fStartDate = value;
-    }}
+    DefineProperty(StartDate, startDate.c_str(), String, std::string, bookedApartment)
+    DefineSet(StartDate, startDate, String, std::string, bookedApartment)
 
     DefineProperty(NumberOfDays, numberOfDays, Int32, int, bookedApartment)
     DefineSetNoMarshal(NumberOfDays, numberOfDays, Int32, int, bookedApartment)

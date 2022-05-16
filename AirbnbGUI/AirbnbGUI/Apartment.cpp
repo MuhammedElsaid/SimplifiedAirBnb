@@ -72,7 +72,7 @@ BookedApartment::BookedApartment(DataItem* dataItem) {
 	this->ID = stoi(dataItem->at("BookingId"));
 	this->numberOfDays = stoi(dataItem->at("NumberOfDays"));
 	this->apartmentID = stoi(dataItem->at("ApartmentId"));
-	this->startDate = stoll(dataItem->at("StartDate"));
+	this->startDate = dataItem->at("StartDate");
 }
 
 BookedApartment::BookedApartment(int apartmentId, long long startDate, int numberOfDays)
@@ -105,7 +105,7 @@ DataItem* BookedApartment::Serialize() {
 
 	dataItem->AddField("BookingId", std::to_string(ID));
 	dataItem->AddField("ApartmentId", std::to_string(apartmentID));
-	dataItem->AddField("StartDate", std::to_string(startDate));
+	dataItem->AddField("StartDate", startDate);
 	dataItem->AddField("NumberOfDays", std::to_string(numberOfDays));
 
 	return dataItem;

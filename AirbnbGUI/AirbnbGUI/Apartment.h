@@ -43,7 +43,7 @@ public:
 	int apartmentID;
 	Apartment* getApartment();
 	
-	long long startDate;
+	std::string startDate;
 	int numberOfDays;
 
 	DataItem* Serialize() override;
