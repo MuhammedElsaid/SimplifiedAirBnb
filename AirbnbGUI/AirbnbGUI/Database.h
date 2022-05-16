@@ -25,7 +25,9 @@ template <class T> class DataSet
 public:
 	//Saving the dataset
 	void Save();
-	virtual void Push(T* item) {}
+	void Push(T* item) {
+		values.push_back(item);
+	}
 	
 	//Loading data set from the path
 	DataSet(std::string path);

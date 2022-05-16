@@ -4,8 +4,6 @@
 #include <string>
 #include "Database.h"
 
-using namespace std;
-
 class DataItem;
 
 class BookedApartment;
@@ -15,13 +13,13 @@ class Apartment : public Serializable
 public:
 
 	Apartment(DataItem* dataItem);
-	static const list<Apartment*>& searchByPrice(double givenPrice);
-	static const list<Apartment*>& searchByCity(string givenCity);
-	static const list<Apartment*>& getApartments();
+	static const std::list<Apartment*>& searchByPrice(double givenPrice);
+	static const std::list<Apartment*>& searchByCity(std::string givenCity);
+	static const std::list<Apartment*>& getApartments();
 
 	int ID;
-	string address;
-	string city;
+	std::string address;
+	std::string city;
 	int availableRooms;
 	double capacity;
 	double price;

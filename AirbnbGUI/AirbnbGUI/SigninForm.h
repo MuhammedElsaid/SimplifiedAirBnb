@@ -1,4 +1,6 @@
 #pragma once
+#include "User.h"
+#include "DataSets.h"
 
 namespace AirbnbGUI {
 
@@ -60,7 +62,6 @@ namespace AirbnbGUI {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(SigninForm::typeid));
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
@@ -133,11 +134,11 @@ namespace AirbnbGUI {
 			this->button1->TabIndex = 8;
 			this->button1->Text = L"Sign in";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &SigninForm::button1_Click);
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
 			this->pictureBox1->ImageLocation = L"Airbnb_Logo.png";
 			this->pictureBox1->Location = System::Drawing::Point(12, 27);
 			this->pictureBox1->Name = L"pictureBox1";
@@ -229,5 +230,11 @@ namespace AirbnbGUI {
 
 			isSignIn = true;
 		}
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		Traveler* traveler = new Traveler({ "Muhammed", "Muhammed@exmpale.com", "Male", 10 });
+		Global::LoadSets();
+		Global::Travelers->Push(traveler);
+	}
 };
 }

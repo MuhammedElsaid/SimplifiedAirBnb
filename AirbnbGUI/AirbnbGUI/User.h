@@ -5,9 +5,6 @@
 #include "Database.h"
 #include "Apartment.h"
 
-
-using namespace std;
-
 class Serializable;
 class DataItem;
 class Apartment;
@@ -23,6 +20,7 @@ public:
 	int age;
 
 	User(DataItem* dataItem);
+	User(std::string fullName, std::string email, std::string gender, int age);
 
 	DataItem* Serialize() override;
 
@@ -36,6 +34,8 @@ public:
 	std::list<Apartment*> ownedApartments;
 
 	Host(DataItem* dataItem);
+	Host(User user) : User(user) {}
+
 	DataItem* Serialize() override;
 };
 
@@ -45,6 +45,7 @@ public:
 	std::list<BookedApartment*> bookedApartments;
 
 	Traveler(DataItem* dataItem);
+	Traveler(User user) : User(user) {}
 	DataItem* Serialize() override;
 };
 
@@ -52,6 +53,8 @@ class Administrator : public User
 {
 public:
 	Administrator(DataItem* dataItem);
+	Administrator(User user) : User(user) {}
+
 
 	bool haveAccess() override {
 

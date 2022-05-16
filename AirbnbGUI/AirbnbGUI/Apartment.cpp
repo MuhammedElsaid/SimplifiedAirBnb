@@ -1,6 +1,7 @@
 #include "Apartment.h"
 #include "DataSets.h"
 
+class Global;
 Apartment::Apartment(DataItem* dataItem) {
 
 	this->ID = stoi(dataItem->at("ID"));
@@ -22,16 +23,16 @@ DataItem* Apartment::Serialize() {
 
 	DataItem* dataItem = new DataItem;
 
-	dataItem->AddField("ID", to_string(this->ID));
+	dataItem->AddField("ID", std::to_string(this->ID));
 	dataItem->AddField("Address", this->address);
 	dataItem->AddField("City", this->city);
-	dataItem->AddField("AvailableRooms", to_string(this->availableRooms));
-	dataItem->AddField("Price", to_string(this->price));
-	dataItem->AddField("Capacity", to_string(this->capacity));
+	dataItem->AddField("AvailableRooms", std::to_string(this->availableRooms));
+	dataItem->AddField("Price", std::to_string(this->price));
+	dataItem->AddField("Capacity", std::to_string(this->capacity));
 
-	std::list<string> bookIdsStr;
+	std::list<std::string> bookIdsStr;
 	for (auto bookId : bookedIDs) 
-		bookIdsStr.push_back(to_string(bookId->bookingID));
+		bookIdsStr.push_back(std::to_string(bookId->bookingID));
 
 	dataItem->AddField("BookedIDs", bookIdsStr);
 	return dataItem;
@@ -39,6 +40,10 @@ DataItem* Apartment::Serialize() {
 
 DataItem* Serializable::Serialize() {
 	return nullptr;
+}
+template<class T>
+const std::list<T*> DataSet<T>::getValues() {
+	return values;
 }
 
 BookedApartment::BookedApartment(DataItem* dataItem) {
@@ -65,10 +70,10 @@ DataItem* BookedApartment::Serialize() {
 
 	auto dataItem = new DataItem;
 
-	dataItem->AddField("BookingId", to_string(bookingID));
-	dataItem->AddField("ApartmentId", to_string(apartment->ID));
-	dataItem->AddField("StartDate", to_string(startDate));
-	dataItem->AddField("NumberOfDays", to_string(numberOfDays));
+	dataItem->AddField("BookingId", std::to_string(bookingID));
+	dataItem->AddField("ApartmentId", std::to_string(apartment->ID));
+	dataItem->AddField("StartDate", std::to_string(startDate));
+	dataItem->AddField("NumberOfDays", std::to_string(numberOfDays));
 
 	return dataItem;
 }

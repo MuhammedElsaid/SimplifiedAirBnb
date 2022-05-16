@@ -2,28 +2,26 @@
 
 BookedApartmentDataSet* Global::BookedApartments;
 ApartmentDataSet* Global::Apartments;
-AdminDataSet* Global::AdminDataSet;
+AdminDataSet* Global::Admins;
 TravelerDataSet* Global::Travelers;
 HostDataSet* Global::Hosts;
+int Global::currentIdCount;
 
-void BookedApartmentDataSet::Push(BookedApartment* apartment) {
+template<class T> DataSet<T>::DataSet(std::string path)
+{
+	this->path = path;
 }
 
-
-void HostDataSet::Push(Host* host) {
-
-	items.push_back(host->Serialize());
-	values.push_back(host);
+void Global::LoadSets()
+{
+	Apartments = new ApartmentDataSet;
+	BookedApartments = new BookedApartmentDataSet;
+	Admins = new AdminDataSet;
+	Travelers = new TravelerDataSet;
+	Hosts = new HostDataSet;
 }
 
-void ApartmentDataSet::Push(Apartment* apartment) {
-
-	items.push_back(apartment->Serialize());
-	values.push_back(apartment);
-}
-
-void TravelerDataSet::Push(Traveler* host) {
-}
-
-void AdminDataSet::Push(Administrator* host) {
+int Global::getNextId()
+{
+	return ++currentIdCount;
 }

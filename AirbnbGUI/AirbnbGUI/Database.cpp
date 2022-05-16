@@ -96,9 +96,9 @@ void DataItem::AddField(std::string key, std::string value)
 }
 const std::string space_delimiter = ",";
 
-void DataItem::AddField(std::string key, std::list<string> values) {
+void DataItem::AddField(std::string key, std::list<std::string> values) {
 
-	string str = "";
+	std::string str = "";
 	for (auto value : values) {
 
 		str += value;
@@ -108,12 +108,12 @@ void DataItem::AddField(std::string key, std::list<string> values) {
 	this->AddField(key, str);
 }
 
-std::list<string> DataItem::getListValues(std::string key) {
+std::list<std::string> DataItem::getListValues(std::string key) {
 
-	std::list<string> values;
-	string str = this->at(key);
+	std::list<std::string> values;
+	std::string str = this->at(key);
 	size_t pos = 0;
-	while ((pos = str.find(space_delimiter)) != string::npos) {
+	while ((pos = str.find(space_delimiter)) != std::string::npos) {
 		values.push_back(str.substr(0, pos));
 		str.erase(0, pos + space_delimiter.length());
 	}
