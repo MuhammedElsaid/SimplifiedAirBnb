@@ -22,6 +22,7 @@ namespace AirbnbGUI {
 		public:
 		SigninForm(void) {
 			InitializeComponent();
+			comboBox1->SelectedIndex = 0;
 
 			Global::LoadSets();
 		}
@@ -51,6 +52,8 @@ namespace AirbnbGUI {
 		private: System::Windows::Forms::Label^ label4;
 		private: System::Windows::Forms::TextBox^ textBox3;
 		private: System::Windows::Forms::Button^ button2;
+		private: System::Windows::Forms::ComboBox^ comboBox1;
+		private: System::Windows::Forms::Label^ label3;
 
 
 	private:
@@ -76,6 +79,8 @@ namespace AirbnbGUI {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -83,7 +88,7 @@ namespace AirbnbGUI {
 			// 
 			this->textBox1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBox1->Location = System::Drawing::Point(40, 234);
+			this->textBox1->Location = System::Drawing::Point(40, 305);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(284, 22);
 			this->textBox1->TabIndex = 0;
@@ -92,7 +97,7 @@ namespace AirbnbGUI {
 			// 
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8));
-			this->label1->Location = System::Drawing::Point(37, 211);
+			this->label1->Location = System::Drawing::Point(37, 282);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(46, 17);
 			this->label1->TabIndex = 1;
@@ -102,7 +107,7 @@ namespace AirbnbGUI {
 			// 
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8));
-			this->label2->Location = System::Drawing::Point(37, 280);
+			this->label2->Location = System::Drawing::Point(37, 351);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(73, 17);
 			this->label2->TabIndex = 3;
@@ -112,7 +117,7 @@ namespace AirbnbGUI {
 			// 
 			this->textBox2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBox2->Location = System::Drawing::Point(40, 303);
+			this->textBox2->Location = System::Drawing::Point(40, 374);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(284, 22);
 			this->textBox2->TabIndex = 2;
@@ -121,7 +126,7 @@ namespace AirbnbGUI {
 			// linkLabel1
 			// 
 			this->linkLabel1->AutoSize = true;
-			this->linkLabel1->Location = System::Drawing::Point(138, 345);
+			this->linkLabel1->Location = System::Drawing::Point(138, 416);
 			this->linkLabel1->Name = L"linkLabel1";
 			this->linkLabel1->Size = System::Drawing::Size(52, 16);
 			this->linkLabel1->TabIndex = 4;
@@ -155,7 +160,7 @@ namespace AirbnbGUI {
 			// 
 			this->label4->AutoSize = true;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8));
-			this->label4->Location = System::Drawing::Point(35, 346);
+			this->label4->Location = System::Drawing::Point(35, 417);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(105, 17);
 			this->label4->TabIndex = 9;
@@ -165,7 +170,7 @@ namespace AirbnbGUI {
 			// 
 			this->textBox3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBox3->Location = System::Drawing::Point(40, 369);
+			this->textBox3->Location = System::Drawing::Point(40, 440);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(284, 22);
 			this->textBox3->TabIndex = 6;
@@ -184,11 +189,33 @@ namespace AirbnbGUI {
 			this->button2->Visible = false;
 			this->button2->Click += gcnew System::EventHandler(this, &SigninForm::button2_Click);
 			// 
+			// comboBox1
+			// 
+			this->comboBox1->DisplayMember = L"Traveler";
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Traveler", L"Host", L"Administrator" });
+			this->comboBox1->Location = System::Drawing::Point(40, 236);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(284, 24);
+			this->comboBox1->TabIndex = 11;
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8));
+			this->label3->Location = System::Drawing::Point(37, 211);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(99, 17);
+			this->label3->TabIndex = 12;
+			this->label3->Text = L"Account Type:";
+			// 
 			// SigninForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(381, 607);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->comboBox1);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->textBox3);
