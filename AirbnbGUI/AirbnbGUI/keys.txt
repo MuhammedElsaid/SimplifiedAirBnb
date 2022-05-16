@@ -1,3 +1,6 @@
 Key=pass
 UserID=6
 -
+Key=pass
+UserID=7
+-

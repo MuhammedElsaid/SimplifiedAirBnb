@@ -3,6 +3,13 @@ Email=mohamed@example.com
 FullName=Muhammed
 Gender=Male
 ID=6
-OwnedApartments=9,10,
+OwnedApartments=4,
 UserType=1
+-
+Age=16
+Email=mohamed@example.com
+FullName=Muhammed
+Gender=Male
+ID=7
+UserType=2
 -

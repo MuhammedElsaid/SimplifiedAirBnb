@@ -5,6 +5,7 @@
 #include "SignupForm.h"
 #include "ApartmentForm.h"
 #include "ApartmentSearch.h"
+#include "AdminPanel.h"
 #include <msclr\marshal_cppstd.h>
 
 namespace AirbnbGUI {
@@ -224,8 +225,9 @@ namespace AirbnbGUI {
 
 			auto emailStr = marshal_as<std::string>(emailTextBox->Text);
 			auto passwordStr = marshal_as<std::string>(passwordTextBox->Text->ToLower());
-			DataItem* signinInfo = new DataItem;
 
+			DataItem* signinInfo = new DataItem;
+			
 			signinInfo->AddField("UserType", std::to_string(accountTypeComboBox->SelectedIndex));
 			signinInfo->AddField("Email", emailStr);
 			auto result = Global::Users->searchForDataItem(signinInfo);
@@ -251,9 +253,11 @@ namespace AirbnbGUI {
 
 				System::Windows::Forms::MessageBox::Show("Logged in successfully!!");
 
-				for(auto user : Global::Users->loadValues())
-					if(user->ID == std::stoi(result->at("ID")))
+				for (auto user : Global::Users->loadValues()) {
+					if (user->ID == std::stoi(result->at("ID"))) {
 						Global::Users->currentSignedInUser = user;
+					}
+				}
 
 				ThreadStart^ threadStart;
 
@@ -266,7 +270,7 @@ namespace AirbnbGUI {
 				else if (accountTypeComboBox->SelectedIndex == 2)
 					threadStart = gcnew ThreadStart(threadStartAdminPanel);
 
-				System::Threading::Thread^ apartmentApplication = gcnew System::Threading::Thread(threadStart);
+				Thread^ apartmentApplication = gcnew Thread(threadStart);
 				apartmentApplication->Start();
 
 				this->Close();
@@ -289,7 +293,7 @@ namespace AirbnbGUI {
 		}
 
 		private: static void threadStartAdminPanel() {
-			Application::Run(gcnew ApartmentForm());
+			Application::Run(gcnew AdminPanel());
 		}
 
 		private: System::Void signUpLinkLabel_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {

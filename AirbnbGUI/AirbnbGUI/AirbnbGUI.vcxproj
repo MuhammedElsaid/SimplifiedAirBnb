@@ -120,6 +120,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Admin.cpp" />
+    <ClCompile Include="AdminPanel.cpp" />
     <ClCompile Include="Apartment.cpp" />
     <ClCompile Include="Database.cpp" />
     <ClCompile Include="DataSets.cpp" />
@@ -127,6 +129,10 @@
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Admin.h" />
+    <ClInclude Include="AdminPanel.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Apartment.h" />
     <ClInclude Include="ApartmentForm.h">
       <FileType>CppForm</FileType>
@@ -151,6 +157,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AdminPanel.resx">
+      <DependentUpon>AdminPanel.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ApartmentForm.resx">
       <DependentUpon>ApartmentForm.h</DependentUpon>
     </EmbeddedResource>

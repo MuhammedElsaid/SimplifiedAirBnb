@@ -4,6 +4,7 @@ BookedApartmentDataSet* Global::BookedApartments;
 ApartmentDataSet* Global::Apartments;
 UsersDataSet* Global::Users;
 KeyDataSet* Global::Keys;
+
 int Global::currentIdCount;
 
 void Global::LoadSets()

@@ -3,6 +3,7 @@
 #include <list>
 #include <string>
 #include "Database.h"
+#include <msclr\marshal_cppstd.h>
 
 class DataItem;
 
