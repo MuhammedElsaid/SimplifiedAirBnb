@@ -19,3 +19,25 @@ void UserDataCell::Remove()
         }
     }
 }
+
+void ApartmentDataCell::Remove()
+{
+    for (Apartment* apartment : *Global::Apartments->getValues()) {
+
+        if (apartment->ID == this->apartment->ID) {
+            Global::Apartments->getValues()->remove(apartment);
+            return;
+        }
+    }
+}
+
+void BookedApartmentDataCell::Remove()
+{
+    for (BookedApartment* bookedApartment : *Global::BookedApartments->getValues()) {
+
+        if (bookedApartment->ID == this->bookedApartment->ID) {
+            Global::BookedApartments->getValues()->remove(bookedApartment);
+            return;
+        }
+    }
+}

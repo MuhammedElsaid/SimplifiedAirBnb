@@ -1,8 +1,8 @@
 Address=Cairo
-AvailableRooms=1
+AvailableRooms=400
 BookedIDs=
-Capacity=250.000000
+Capacity=500.000000
 City=Cairo
 ID=4
-Price=15.000000
+Price=3000.000000
 -

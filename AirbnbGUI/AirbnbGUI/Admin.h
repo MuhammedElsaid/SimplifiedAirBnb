@@ -27,6 +27,7 @@ ref class ApartmentDataCell
     public: ApartmentDataCell(Apartment* apartment) {
         this->apartment = apartment;
     }
+    public: void Remove();
 
     private: Apartment* apartment;
 
@@ -75,6 +76,8 @@ ref class BookedApartmentDataCell
 
         this->bookedApartment = bookedApartment;
     }
+
+    public: void Remove();
 
     private: BookedApartment* bookedApartment;
 

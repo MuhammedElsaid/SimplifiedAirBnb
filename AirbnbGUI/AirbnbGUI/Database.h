@@ -79,6 +79,9 @@ public:
 					}
 				}
 			}
+
+			if (currentDataItem)
+				break;
 		}
 
 		if (!currentDataItem)

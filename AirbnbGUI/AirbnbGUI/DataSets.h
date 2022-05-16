@@ -21,7 +21,7 @@ class UsersDataSet : public DataSet<User>
 public:
 	UsersDataSet() : DataSet("users.txt") {}
 
-	const std::list<User*> loadValues() override{
+	const std::list<User*> loadValues() override {
 
 		values.clear();
 		auto readItems = Open();
