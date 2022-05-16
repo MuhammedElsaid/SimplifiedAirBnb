@@ -1,6 +1,11 @@
 #include "User.h"
 #include "DataSets.h"
 
+void User::setKey(std::string key)
+{
+	this->tempKey = key;
+}
+
 User::User(DataItem* dataItem) {
 
 	this->ID = stoi(dataItem->at("ID"));
@@ -27,11 +32,15 @@ User::User(std::string fullName, std::string email, std::string gender, int age)
 
 DataItem* User::Serialize() {
 	auto dataItem = new DataItem;
+	dataItem->AddField("UserType", std::to_string(userType));
 	dataItem->AddField("ID", std::to_string(this->ID));
 	dataItem->AddField("FullName", this->fullName);
 	dataItem->AddField("Email", this->email);
 	dataItem->AddField("Gender", this->gender);
 	dataItem->AddField("Age", std::to_string(this->age));
+
+	dataItem->AddField("Key", tempKey);
+	tempKey = "";
 
 	return dataItem;
 }

@@ -59,5 +59,8 @@
     <ClInclude Include="DataSets.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SignupForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

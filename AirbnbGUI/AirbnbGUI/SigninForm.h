@@ -1,6 +1,7 @@
 #pragma once
 #include "User.h"
 #include "DataSets.h"
+#include "SignupForm.h"
 #include <msclr\marshal_cppstd.h>
 
 namespace AirbnbGUI {
@@ -21,10 +22,10 @@ namespace AirbnbGUI {
 	{
 		public:
 		SigninForm(void) {
-			InitializeComponent();
-			comboBox1->SelectedIndex = 0;
 
-			Global::LoadSets();
+			InitializeComponent();
+			accountTypeComboBox->SelectedIndex = 0;
+			accountTypeComboBox->DropDownStyle = ComboBoxStyle::DropDownList;
 		}
 
 		
@@ -40,19 +41,26 @@ namespace AirbnbGUI {
 				delete components;
 			}
 		}
-		private: System::Windows::Forms::TextBox^ textBox1;
+		private: System::Windows::Forms::TextBox^ emailTextBox;
+		protected:
+
 		protected:
 		private: System::Windows::Forms::Label^ label1;
 		private: System::Windows::Forms::Label^ label2;
-		private: System::Windows::Forms::TextBox^ textBox2;
-		private: System::Windows::Forms::LinkLabel^ linkLabel1;
+		private: System::Windows::Forms::TextBox^ passwordTextBox;
+		private: System::Windows::Forms::LinkLabel^ signUpLinkLabel;
+		private: System::Windows::Forms::Button^ SignInButton;
 
-		private: System::Windows::Forms::Button^ button1;
+
+
+
+
 		private: System::Windows::Forms::PictureBox^ pictureBox1;
 		private: System::Windows::Forms::Label^ label4;
-		private: System::Windows::Forms::TextBox^ textBox3;
-		private: System::Windows::Forms::Button^ button2;
-		private: System::Windows::Forms::ComboBox^ comboBox1;
+		private: System::Windows::Forms::ComboBox^ accountTypeComboBox;
+
+
+
 		private: System::Windows::Forms::Label^ label3;
 
 
@@ -69,29 +77,27 @@ namespace AirbnbGUI {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->emailTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->linkLabel1 = (gcnew System::Windows::Forms::LinkLabel());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->passwordTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->signUpLinkLabel = (gcnew System::Windows::Forms::LinkLabel());
+			this->SignInButton = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->accountTypeComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
-			// textBox1
+			// emailTextBox
 			// 
-			this->textBox1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+			this->emailTextBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBox1->Location = System::Drawing::Point(40, 305);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(284, 22);
-			this->textBox1->TabIndex = 0;
+			this->emailTextBox->Location = System::Drawing::Point(40, 305);
+			this->emailTextBox->Name = L"emailTextBox";
+			this->emailTextBox->Size = System::Drawing::Size(285, 22);
+			this->emailTextBox->TabIndex = 0;
 			// 
 			// label1
 			// 
@@ -113,43 +119,43 @@ namespace AirbnbGUI {
 			this->label2->TabIndex = 3;
 			this->label2->Text = L"Password:";
 			// 
-			// textBox2
+			// passwordTextBox
 			// 
-			this->textBox2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+			this->passwordTextBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBox2->Location = System::Drawing::Point(40, 374);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(284, 22);
-			this->textBox2->TabIndex = 2;
-			this->textBox2->UseSystemPasswordChar = true;
+			this->passwordTextBox->Location = System::Drawing::Point(40, 374);
+			this->passwordTextBox->Name = L"passwordTextBox";
+			this->passwordTextBox->Size = System::Drawing::Size(285, 22);
+			this->passwordTextBox->TabIndex = 2;
+			this->passwordTextBox->UseSystemPasswordChar = true;
 			// 
-			// linkLabel1
+			// signUpLinkLabel
 			// 
-			this->linkLabel1->AutoSize = true;
-			this->linkLabel1->Location = System::Drawing::Point(138, 416);
-			this->linkLabel1->Name = L"linkLabel1";
-			this->linkLabel1->Size = System::Drawing::Size(52, 16);
-			this->linkLabel1->TabIndex = 4;
-			this->linkLabel1->TabStop = true;
-			this->linkLabel1->Text = L"Sign up";
-			this->linkLabel1->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &SigninForm::linkLabel1_LinkClicked);
+			this->signUpLinkLabel->AutoSize = true;
+			this->signUpLinkLabel->Location = System::Drawing::Point(138, 416);
+			this->signUpLinkLabel->Name = L"signUpLinkLabel";
+			this->signUpLinkLabel->Size = System::Drawing::Size(52, 16);
+			this->signUpLinkLabel->TabIndex = 4;
+			this->signUpLinkLabel->TabStop = true;
+			this->signUpLinkLabel->Text = L"Sign up";
+			this->signUpLinkLabel->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &SigninForm::signUpLinkLabel_LinkClicked);
 			// 
-			// button1
+			// SignInButton
 			// 
-			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-			this->button1->Location = System::Drawing::Point(267, 560);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(102, 35);
-			this->button1->TabIndex = 8;
-			this->button1->Text = L"Sign in";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &SigninForm::button1_Click);
+			this->SignInButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->SignInButton->Location = System::Drawing::Point(268, 606);
+			this->SignInButton->Name = L"SignInButton";
+			this->SignInButton->Size = System::Drawing::Size(102, 35);
+			this->SignInButton->TabIndex = 8;
+			this->SignInButton->Text = L"Sign in";
+			this->SignInButton->UseVisualStyleBackColor = true;
+			this->SignInButton->Click += gcnew System::EventHandler(this, &SigninForm::signInButton_Click);
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->Anchor = System::Windows::Forms::AnchorStyles::Top;
 			this->pictureBox1->ImageLocation = L"Airbnb_Logo.png";
-			this->pictureBox1->Location = System::Drawing::Point(12, 27);
+			this->pictureBox1->Location = System::Drawing::Point(13, 27);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(357, 171);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
@@ -166,38 +172,15 @@ namespace AirbnbGUI {
 			this->label4->TabIndex = 9;
 			this->label4->Text = L"Not a member\?";
 			// 
-			// textBox3
+			// accountTypeComboBox
 			// 
-			this->textBox3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBox3->Location = System::Drawing::Point(40, 440);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(284, 22);
-			this->textBox3->TabIndex = 6;
-			this->textBox3->UseSystemPasswordChar = true;
-			this->textBox3->Visible = false;
-			// 
-			// button2
-			// 
-			this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-			this->button2->Location = System::Drawing::Point(12, 560);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(102, 35);
-			this->button2->TabIndex = 10;
-			this->button2->Text = L"Back";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Visible = false;
-			this->button2->Click += gcnew System::EventHandler(this, &SigninForm::button2_Click);
-			// 
-			// comboBox1
-			// 
-			this->comboBox1->DisplayMember = L"Traveler";
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Traveler", L"Host", L"Administrator" });
-			this->comboBox1->Location = System::Drawing::Point(40, 236);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(284, 24);
-			this->comboBox1->TabIndex = 11;
+			this->accountTypeComboBox->DisplayMember = L"Traveler";
+			this->accountTypeComboBox->FormattingEnabled = true;
+			this->accountTypeComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Traveler", L"Host", L"Administrator" });
+			this->accountTypeComboBox->Location = System::Drawing::Point(40, 236);
+			this->accountTypeComboBox->Name = L"accountTypeComboBox";
+			this->accountTypeComboBox->Size = System::Drawing::Size(284, 24);
+			this->accountTypeComboBox->TabIndex = 11;
 			// 
 			// label3
 			// 
@@ -213,19 +196,17 @@ namespace AirbnbGUI {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(381, 607);
+			this->ClientSize = System::Drawing::Size(382, 653);
 			this->Controls->Add(this->label3);
-			this->Controls->Add(this->comboBox1);
-			this->Controls->Add(this->button2);
+			this->Controls->Add(this->accountTypeComboBox);
 			this->Controls->Add(this->label4);
-			this->Controls->Add(this->textBox3);
 			this->Controls->Add(this->pictureBox1);
-			this->Controls->Add(this->button1);
-			this->Controls->Add(this->linkLabel1);
+			this->Controls->Add(this->SignInButton);
+			this->Controls->Add(this->signUpLinkLabel);
 			this->Controls->Add(this->label2);
-			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->passwordTextBox);
 			this->Controls->Add(this->label1);
-			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->emailTextBox);
 			this->Name = L"SigninForm";
 			this->Text = L"Sign in";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
@@ -235,40 +216,37 @@ namespace AirbnbGUI {
 		}
 #pragma endregion
 
-		System::Boolean isSignIn = true;
-		private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+		private: System::Void signInButton_Click(System::Object^ sender, System::EventArgs^ e) {
 
-			textBox1->Focus();
+			auto emailStr = marshal_as<std::string>(emailTextBox->Text);
+			auto passwordStr = marshal_as<std::string>(passwordTextBox->Text);
+			DataItem* signinInfo = new DataItem;
 
-			label4->Text = "Repeat password:";
-			textBox3->Visible = true;
-			button1->Text = "Sign up";
-			linkLabel1->Visible = false;
-			button2->Visible = true;
+			signinInfo->AddField("UserType", std::to_string(accountTypeComboBox->SelectedIndex));
+			signinInfo->AddField("Email", emailStr);
+			signinInfo->AddField("Key", passwordStr);
 
-			isSignIn = false;
-		}
+			auto result = Global::Users->searchForDataItem(signinInfo);
 
-		private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (result) {
 
-			textBox1->Focus();
+				System::Windows::Forms::MessageBox::Show("Logged in successfully!!");
+			}
+			else {
+				System::Windows::Forms::MessageBox::Show("Invalid credentials!!");
 
-			label4->Text = "Not a member?";
-			textBox3->Visible = false;
-			button1->Text = "Sign in";
-			linkLabel1->Visible = true;
-			button2->Visible = false;
-
-			isSignIn = true;
-		}
-
-		private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-
-			Traveler* traveler = new Traveler({ marshal_as<std::string>(textBox1->Text), marshal_as<std::string>(textBox1->Text) + "@exmpale.com", "Male", 21 });
-			auto values = Global::Travelers->getValues();
+			}
 			//Global::Travelers->Push(traveler);
 			//Global::Travelers->Save();
 			
+		}
+
+		private: System::Void signUpLinkLabel_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+			SignupForm^ signupForm = gcnew SignupForm;
+
+			signupForm->Show();
+			this->Hide();
+
 		}
 };
 }

@@ -1,0 +1,9 @@
+Age=22
+Email=mohamed@example.com
+FullName=Muhammed
+Gender=Male
+ID=1
+Key=pass
+OwnedApartments=
+UserType=1
+-

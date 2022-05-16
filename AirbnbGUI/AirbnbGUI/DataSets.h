@@ -16,22 +16,10 @@ class BookedApartmentDataSet : public DataSet<BookedApartment>
 	BookedApartmentDataSet() : DataSet("booked_apartments.txt") {}
 };
 
-class HostDataSet : public DataSet<Host>
+class UsersDataSet : public DataSet<User>
 {
 	public:
-	HostDataSet() : DataSet("hosts.txt") {}
-};
-
-class TravelerDataSet : public DataSet<Traveler>
-{
-	public:
-	TravelerDataSet() : DataSet("travelers.txt") {}
-};
-
-class AdminDataSet : public DataSet<Administrator>
-{
-	public:
-	AdminDataSet() : DataSet("admins.txt") {}
+	UsersDataSet() : DataSet("users.txt") {}
 };
 
 class Global
@@ -41,9 +29,7 @@ class Global
 	static void LoadSets();
 	static ApartmentDataSet* Apartments;
 	static BookedApartmentDataSet* BookedApartments;
-	static AdminDataSet* Admins;
-	static TravelerDataSet* Travelers;
-	static HostDataSet* Hosts;
+	static UsersDataSet* Users;
 
 	static int getNextId();
 

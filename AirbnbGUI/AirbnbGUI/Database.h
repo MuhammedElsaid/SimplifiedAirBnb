@@ -54,7 +54,39 @@ public:
 		this->values = loadValues();
 	}
 
-	DataItem* searchForDataItem(DataItem* dataItem);
+	DataItem* searchForDataItem(DataItem* dataItem) {
+
+		DataItem* currentDataItem = nullptr;
+
+		auto tempItems = Open();
+
+		for (auto dataValue : tempItems) {
+			for (auto dataItemValues : *dataItem) {
+				
+				currentDataItem = dataValue;
+
+				if (dataValue->empty())
+					break;
+
+				auto it = dataValue->find(dataItemValues.first);
+
+				if (it != dataValue->end()) {
+					if (it->second != dataItemValues.second) {
+						currentDataItem = nullptr;
+						break;
+					}
+				}
+			}
+		}
+
+		if (!currentDataItem)
+			return nullptr;
+
+		auto foundItem = new DataItem(*currentDataItem);
+		Close();
+
+		return foundItem;
+	}
 
 	const std::list<T*> getValues() {
 		return values;
@@ -81,13 +113,12 @@ protected:
 private:
 	std::list<DataItem*> Open() {
 
-		std::list<DataItem*> dataItems;
-
 		std::ifstream fileStream(path);
 		if (!fileStream) {
 			std::ofstream outFileStream(path, std::ofstream::out);
 			outFileStream.close();
-			return dataItems;
+			items.clear();
+			return items;
 		}
 
 		std::string currentLine;
@@ -118,6 +149,8 @@ private:
 
 		for (auto item : items)
 			delete item;
+
+		items.clear();
 	}
 
 };

@@ -3,24 +3,6 @@
 #include <filesystem>
 #include <fstream>
 
-template<class T> DataItem* DataSet<T>::searchForDataItem(DataItem* dataItem) {
-
-	DataItem* currentDataItem = nullptr;
-
-	for (auto dataValue : items) {
-		for (auto dataItemValues : *dataItem) {
-
-			currentDataItem = dataValue;
-			if (dataValue->at(dataItemValues.first) != dataItemValues.second) {
-				currentDataItem = nullptr;
-				break;
-			}
-		}
-	}
-
-	return currentDataItem;
-}
-
 void DataItem::AddField(std::string key, std::string value)
 {
 	this->insert({ key, value });
