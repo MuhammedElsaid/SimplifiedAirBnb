@@ -18,8 +18,6 @@ Apartment::Apartment(DataItem* dataItem) {
 
 Apartment::Apartment(std::string address, std::string city, int availableRooms, double capacity, double price)
 {
-	this->ID = Global::getNextId();
-
 	this->address = address;
 	this->city = city;
 	this->availableRooms = availableRooms;
@@ -58,6 +56,11 @@ DataItem* Apartment::Serialize() {
 
 	dataItem->AddField("BookedIDs", bookIdsStr);
 	return dataItem;
+}
+
+Serializable::Serializable()
+{
+	this->ID = Global::getNextId();
 }
 
 DataItem* Serializable::Serialize() {

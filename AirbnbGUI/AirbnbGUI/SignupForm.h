@@ -344,7 +344,7 @@ namespace AirbnbGUI {
 		private: System::Void signUpButton_Click(System::Object^ sender, System::EventArgs^ e) {
 
 
-			auto emailStr = marshal_as<std::string>(emailTextBox->Text);
+			auto emailStr = marshal_as<std::string>(emailTextBox->Text->ToLower());
 			auto fullNameStr = marshal_as<std::string>(fullNameTextBox->Text);
 			auto passwordStr = marshal_as<std::string>(passTextBox->Text);
 			auto genderStr = marshal_as<std::string>(genderComboBox->Text);
@@ -371,7 +371,11 @@ namespace AirbnbGUI {
 				new Traveler({ fullNameStr, emailStr, genderStr, age }) :
 				new Host({ fullNameStr, emailStr, genderStr, age });
 			
-			user->setKey(passwordStr);
+
+			UserKey* userKey = new UserKey(user->ID, passwordStr);
+			Global::Keys->Push(userKey);
+			Global::Keys->Save();
+
 			Global::Users->Push(user);
 			Global::Users->Save();
 				

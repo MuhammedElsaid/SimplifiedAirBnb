@@ -39,9 +39,9 @@ public:
 
 	double CalculateTotalPrice();
 
+	int apartmentID;
 	Apartment* getApartment();
 	
-	int apartmentID;
 	long long startDate;
 	int numberOfDays;
 

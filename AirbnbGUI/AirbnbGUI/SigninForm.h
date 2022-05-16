@@ -1,7 +1,10 @@
 #pragma once
 #include "User.h"
+#include "Database.h"
 #include "DataSets.h"
 #include "SignupForm.h"
+#include "ApartmentForm.h"
+#include "ApartmentSearch.h"
 #include <msclr\marshal_cppstd.h>
 
 namespace AirbnbGUI {
@@ -12,6 +15,7 @@ namespace AirbnbGUI {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Threading;
 	using namespace msclr::interop;
 
 	
@@ -219,26 +223,73 @@ namespace AirbnbGUI {
 		private: System::Void signInButton_Click(System::Object^ sender, System::EventArgs^ e) {
 
 			auto emailStr = marshal_as<std::string>(emailTextBox->Text);
-			auto passwordStr = marshal_as<std::string>(passwordTextBox->Text);
+			auto passwordStr = marshal_as<std::string>(passwordTextBox->Text->ToLower());
 			DataItem* signinInfo = new DataItem;
 
 			signinInfo->AddField("UserType", std::to_string(accountTypeComboBox->SelectedIndex));
 			signinInfo->AddField("Email", emailStr);
-			signinInfo->AddField("Key", passwordStr);
-
 			auto result = Global::Users->searchForDataItem(signinInfo);
 
-			if (result) {
+			bool isSignedIn = false;
 
-				System::Windows::Forms::MessageBox::Show("Logged in successfully!!");
+			if (result) {
+				
+				auto userId = std::stoi(result->at("ID"));
+
+				for (UserKey* key : Global::Keys->getValues()) {
+					if (key->userId == userId && key->key == passwordStr)
+						isSignedIn = true;
+				}
 			}
 			else {
-				System::Windows::Forms::MessageBox::Show("Invalid credentials!!");
+				System::Windows::Forms::MessageBox::Show("Email doesn't exist!!");
+				emailTextBox->Focus();
+				return;
+			}
 
+			if (isSignedIn) {
+
+				System::Windows::Forms::MessageBox::Show("Logged in successfully!!");
+
+				for(auto user : Global::Users->loadValues())
+					if(user->ID == std::stoi(result->at("ID")))
+						Global::Users->currentSignedInUser = user;
+
+				ThreadStart^ threadStart;
+
+				if (accountTypeComboBox->SelectedIndex == 0)
+					threadStart = gcnew ThreadStart(threadStartApartmentSearch);
+
+				else if (accountTypeComboBox->SelectedIndex == 1)
+					threadStart = gcnew ThreadStart(threadStartApartmentForm);
+
+				else if (accountTypeComboBox->SelectedIndex == 2)
+					threadStart = gcnew ThreadStart(threadStartAdminPanel);
+
+				System::Threading::Thread^ apartmentApplication = gcnew System::Threading::Thread(threadStart);
+				apartmentApplication->Start();
+
+				this->Close();
+			}
+			else {
+				System::Windows::Forms::MessageBox::Show("Your password is incorrect!!");
+				passwordTextBox->Focus();
 			}
 			//Global::Travelers->Push(traveler);
 			//Global::Travelers->Save();
 			
+		}
+
+		private: static void threadStartApartmentForm() {
+			Application::Run(gcnew ApartmentForm());
+		}
+
+		private: static void threadStartApartmentSearch() {
+			Application::Run(gcnew ApartmentSearch());
+		}
+
+		private: static void threadStartAdminPanel() {
+			Application::Run(gcnew ApartmentForm());
 		}
 
 		private: System::Void signUpLinkLabel_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {

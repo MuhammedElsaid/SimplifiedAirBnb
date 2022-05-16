@@ -1,4 +1,8 @@
 #pragma once
+#include "Database.h"
+#include "DataSets.h"
+#include "Apartment.h"
+#include <msclr\marshal_cppstd.h>
 
 namespace AirbnbGUI {
 
@@ -8,6 +12,7 @@ namespace AirbnbGUI {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace msclr::interop;
 
 	/// <summary>
 	/// Summary for ApartmentForm
@@ -35,23 +40,28 @@ namespace AirbnbGUI {
 			}
 		}
 		private: System::Windows::Forms::Label^ label1;
+		private: System::Windows::Forms::TextBox^ addressBox;
 		protected:
-		private: System::Windows::Forms::TextBox^ textBox1;
+
 		private: System::Windows::Forms::Label^ label2;
 		private: System::Windows::Forms::Label^ label3;
-		private: System::Windows::Forms::TextBox^ textBox2;
+		private: System::Windows::Forms::TextBox^ cityTextBox;
+
 		private: System::Windows::Forms::Label^ label4;
-		private: System::Windows::Forms::NumericUpDown^ numericUpDown1;
+		private: System::Windows::Forms::NumericUpDown^ availableRoomsBox;
+
 		private: System::Windows::Forms::Label^ label5;
-		private: System::Windows::Forms::NumericUpDown^ numericUpDown2;
-		private: System::Windows::Forms::NumericUpDown^ numericUpDown3;
+		private: System::Windows::Forms::NumericUpDown^ capacityBox;
+		private: System::Windows::Forms::NumericUpDown^ priceBox;
+
+
 		private: System::Windows::Forms::Label^ label6;
 		private: System::Windows::Forms::PictureBox^ pictureBox1;
 		private: System::Windows::Forms::Button^ button1;
-		private: System::Windows::Forms::DateTimePicker^ dateTimePicker1;
-		private: System::Windows::Forms::DateTimePicker^ dateTimePicker2;
-		private: System::Windows::Forms::Label^ label7;
-		private: System::Windows::Forms::Label^ label8;
+
+
+
+
 
 	private:
 		/// <summary>
@@ -67,25 +77,21 @@ namespace AirbnbGUI {
 		void InitializeComponent(void)
 		{
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->addressBox = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->cityTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->numericUpDown1 = (gcnew System::Windows::Forms::NumericUpDown());
+			this->availableRoomsBox = (gcnew System::Windows::Forms::NumericUpDown());
 			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->numericUpDown2 = (gcnew System::Windows::Forms::NumericUpDown());
-			this->numericUpDown3 = (gcnew System::Windows::Forms::NumericUpDown());
+			this->capacityBox = (gcnew System::Windows::Forms::NumericUpDown());
+			this->priceBox = (gcnew System::Windows::Forms::NumericUpDown());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
-			this->dateTimePicker2 = (gcnew System::Windows::Forms::DateTimePicker());
-			this->label7 = (gcnew System::Windows::Forms::Label());
-			this->label8 = (gcnew System::Windows::Forms::Label());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown3))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->availableRoomsBox))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->capacityBox))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->priceBox))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -99,15 +105,15 @@ namespace AirbnbGUI {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Register an apartment:";
 			// 
-			// textBox1
+			// addressBox
 			// 
-			this->textBox1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+			this->addressBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBox1->Location = System::Drawing::Point(12, 312);
-			this->textBox1->Multiline = true;
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(313, 78);
-			this->textBox1->TabIndex = 1;
+			this->addressBox->Location = System::Drawing::Point(12, 312);
+			this->addressBox->Multiline = true;
+			this->addressBox->Name = L"addressBox";
+			this->addressBox->Size = System::Drawing::Size(313, 78);
+			this->addressBox->TabIndex = 4;
 			// 
 			// label2
 			// 
@@ -127,14 +133,14 @@ namespace AirbnbGUI {
 			this->label3->TabIndex = 4;
 			this->label3->Text = L"City:";
 			// 
-			// textBox2
+			// cityTextBox
 			// 
-			this->textBox2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+			this->cityTextBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBox2->Location = System::Drawing::Point(12, 258);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(313, 22);
-			this->textBox2->TabIndex = 3;
+			this->cityTextBox->Location = System::Drawing::Point(12, 258);
+			this->cityTextBox->Name = L"cityTextBox";
+			this->cityTextBox->Size = System::Drawing::Size(313, 22);
+			this->cityTextBox->TabIndex = 3;
 			// 
 			// label4
 			// 
@@ -146,15 +152,15 @@ namespace AirbnbGUI {
 			this->label4->TabIndex = 6;
 			this->label4->Text = L"Available rooms:";
 			// 
-			// numericUpDown1
+			// availableRoomsBox
 			// 
-			this->numericUpDown1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->numericUpDown1->Location = System::Drawing::Point(349, 367);
-			this->numericUpDown1->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
-			this->numericUpDown1->Name = L"numericUpDown1";
-			this->numericUpDown1->Size = System::Drawing::Size(377, 22);
-			this->numericUpDown1->TabIndex = 7;
-			this->numericUpDown1->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
+			this->availableRoomsBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->availableRoomsBox->Location = System::Drawing::Point(349, 367);
+			this->availableRoomsBox->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
+			this->availableRoomsBox->Name = L"availableRoomsBox";
+			this->availableRoomsBox->Size = System::Drawing::Size(377, 22);
+			this->availableRoomsBox->TabIndex = 7;
+			this->availableRoomsBox->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			// 
 			// label5
 			// 
@@ -166,29 +172,29 @@ namespace AirbnbGUI {
 			this->label5->TabIndex = 9;
 			this->label5->Text = L"Capacity (m3):";
 			// 
-			// numericUpDown2
+			// capacityBox
 			// 
-			this->numericUpDown2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->numericUpDown2->DecimalPlaces = 2;
-			this->numericUpDown2->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) { 100, 0, 0, 0 });
-			this->numericUpDown2->Location = System::Drawing::Point(349, 257);
-			this->numericUpDown2->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 999999, 0, 0, 0 });
-			this->numericUpDown2->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 250, 0, 0, 0 });
-			this->numericUpDown2->Name = L"numericUpDown2";
-			this->numericUpDown2->Size = System::Drawing::Size(378, 22);
-			this->numericUpDown2->TabIndex = 10;
-			this->numericUpDown2->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 250, 0, 0, 0 });
+			this->capacityBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->capacityBox->DecimalPlaces = 2;
+			this->capacityBox->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) { 100, 0, 0, 0 });
+			this->capacityBox->Location = System::Drawing::Point(349, 257);
+			this->capacityBox->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 999999, 0, 0, 0 });
+			this->capacityBox->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 250, 0, 0, 0 });
+			this->capacityBox->Name = L"capacityBox";
+			this->capacityBox->Size = System::Drawing::Size(378, 22);
+			this->capacityBox->TabIndex = 5;
+			this->capacityBox->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 250, 0, 0, 0 });
 			// 
-			// numericUpDown3
+			// priceBox
 			// 
-			this->numericUpDown3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->numericUpDown3->DecimalPlaces = 2;
-			this->numericUpDown3->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) { 5, 0, 0, 0 });
-			this->numericUpDown3->Location = System::Drawing::Point(349, 312);
-			this->numericUpDown3->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1000000, 0, 0, 0 });
-			this->numericUpDown3->Name = L"numericUpDown3";
-			this->numericUpDown3->Size = System::Drawing::Size(378, 22);
-			this->numericUpDown3->TabIndex = 12;
+			this->priceBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->priceBox->DecimalPlaces = 2;
+			this->priceBox->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) { 5, 0, 0, 0 });
+			this->priceBox->Location = System::Drawing::Point(349, 312);
+			this->priceBox->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1000000, 0, 0, 0 });
+			this->priceBox->Name = L"priceBox";
+			this->priceBox->Size = System::Drawing::Size(378, 22);
+			this->priceBox->TabIndex = 6;
 			// 
 			// label6
 			// 
@@ -214,73 +220,37 @@ namespace AirbnbGUI {
 			// button1
 			// 
 			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-			this->button1->Location = System::Drawing::Point(611, 500);
+			this->button1->Location = System::Drawing::Point(611, 451);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(125, 38);
-			this->button1->TabIndex = 14;
+			this->button1->TabIndex = 8;
 			this->button1->Text = L"Register";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &ApartmentForm::button1_Click);
-			// 
-			// dateTimePicker1
-			// 
-			this->dateTimePicker1->Location = System::Drawing::Point(13, 428);
-			this->dateTimePicker1->Name = L"dateTimePicker1";
-			this->dateTimePicker1->Size = System::Drawing::Size(313, 22);
-			this->dateTimePicker1->TabIndex = 15;
-			// 
-			// dateTimePicker2
-			// 
-			this->dateTimePicker2->Location = System::Drawing::Point(350, 428);
-			this->dateTimePicker2->Name = L"dateTimePicker2";
-			this->dateTimePicker2->Size = System::Drawing::Size(377, 22);
-			this->dateTimePicker2->TabIndex = 16;
-			// 
-			// label7
-			// 
-			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(10, 409);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(67, 16);
-			this->label7->TabIndex = 17;
-			this->label7->Text = L"Start date:";
-			// 
-			// label8
-			// 
-			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(347, 409);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(64, 16);
-			this->label8->TabIndex = 18;
-			this->label8->Text = L"End date:";
 			// 
 			// ApartmentForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(748, 550);
-			this->Controls->Add(this->label8);
-			this->Controls->Add(this->label7);
-			this->Controls->Add(this->dateTimePicker2);
-			this->Controls->Add(this->dateTimePicker1);
+			this->ClientSize = System::Drawing::Size(748, 501);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->pictureBox1);
-			this->Controls->Add(this->numericUpDown3);
+			this->Controls->Add(this->priceBox);
 			this->Controls->Add(this->label6);
-			this->Controls->Add(this->numericUpDown2);
+			this->Controls->Add(this->capacityBox);
 			this->Controls->Add(this->label5);
-			this->Controls->Add(this->numericUpDown1);
+			this->Controls->Add(this->availableRoomsBox);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label3);
-			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->cityTextBox);
 			this->Controls->Add(this->label2);
-			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->addressBox);
 			this->Controls->Add(this->label1);
 			this->Name = L"ApartmentForm";
 			this->Text = L"ApartmentForm";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown3))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->availableRoomsBox))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->capacityBox))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->priceBox))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -288,6 +258,23 @@ namespace AirbnbGUI {
 		}
 #pragma endregion
 		private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+
+			auto cityStr = marshal_as<std::string>(cityTextBox->Text);
+			auto addressStr = marshal_as<std::string>(addressBox->Text);
+			auto availableRooms = Decimal::ToInt32(availableRoomsBox->Value);
+			auto capacity = Decimal::ToDouble(capacityBox->Value);
+			auto price = Decimal::ToDouble(priceBox->Value);
+
+			Apartment* apartment = new Apartment(addressStr, cityStr, availableRooms, capacity, price);
+
+			Host* signedInHost = (Host*)Global::Users->currentSignedInUser;
+
+			signedInHost->ownedApartmentsIds.push_back(apartment->ID);
+			Global::Users->Save();
+
+			Global::Apartments->Push(apartment);
+			Global::Apartments->Save();
+
 		}
 };
 }

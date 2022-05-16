@@ -18,7 +18,7 @@ class BookedApartmentDataSet : public DataSet<BookedApartment>
 
 class UsersDataSet : public DataSet<User>
 {
-	public:
+public:
 	UsersDataSet() : DataSet("users.txt") {}
 
 	const std::list<User*> loadValues() override{
@@ -42,6 +42,15 @@ class UsersDataSet : public DataSet<User>
 		Close();
 		return values;
 	}
+
+	//TODO:: getter and setter
+	User* currentSignedInUser;
+};
+
+class KeyDataSet : public DataSet<UserKey>
+{
+public:
+	KeyDataSet() : DataSet("keys.txt") {}
 };
 
 class Global
@@ -52,9 +61,11 @@ class Global
 	static ApartmentDataSet* Apartments;
 	static BookedApartmentDataSet* BookedApartments;
 	static UsersDataSet* Users;
+	static KeyDataSet* Keys;
 
 	static int getNextId();
 
 private:
 	static int currentIdCount;
 };
+

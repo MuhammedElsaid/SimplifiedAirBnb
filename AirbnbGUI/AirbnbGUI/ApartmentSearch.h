@@ -35,7 +35,9 @@ namespace AirbnbGUI {
 			}
 		}
 		private: System::Windows::Forms::PictureBox^ pictureBox1;
-		private: System::Windows::Forms::TextBox^ textBox1;
+		private: System::Windows::Forms::TextBox^ cityTextBox;
+
+
 		private: System::Windows::Forms::Label^ label1;
 		private: System::Windows::Forms::Label^ label2;
 
@@ -65,7 +67,7 @@ namespace AirbnbGUI {
 		void InitializeComponent(void)
 		{
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->cityTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -93,12 +95,12 @@ namespace AirbnbGUI {
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
 			// 
-			// textBox1
+			// cityTextBox
 			// 
-			this->textBox1->Location = System::Drawing::Point(23, 179);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(401, 22);
-			this->textBox1->TabIndex = 1;
+			this->cityTextBox->Location = System::Drawing::Point(23, 179);
+			this->cityTextBox->Name = L"cityTextBox";
+			this->cityTextBox->Size = System::Drawing::Size(401, 22);
+			this->cityTextBox->TabIndex = 1;
 			// 
 			// label1
 			// 
@@ -225,7 +227,7 @@ namespace AirbnbGUI {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
-			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->cityTextBox);
 			this->Controls->Add(this->pictureBox1);
 			this->Name = L"ApartmentSearch";
 			this->Text = L"ApartmentSearch";

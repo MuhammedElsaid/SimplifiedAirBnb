@@ -11,7 +11,6 @@ class Apartment;
 class BookedApartment;
 
 
-
 class User : public Serializable
 {
 protected:
@@ -29,23 +28,36 @@ public:
 	std::string gender;
 	int age;
 
-	void setKey(std::string key);
-
 	User(DataItem* dataItem);
 	User(std::string fullName, std::string email, std::string gender, int age);
 
 	DataItem* Serialize() override;
 
 	virtual bool haveAccess() { return false; }
+};
 
-private:
-	std::string tempKey;
+class UserKey : Serializable
+{
+public:
+
+	int userId;
+	std::string key;
+
+	UserKey(DataItem* dataItem);
+	UserKey(int userId, std::string key) {
+
+		this->userId = userId;
+		this->key = key;
+	}
+
+	DataItem* Serialize() override;
 };
 
 class Host : public User
 {
 public:
-	std::list<Apartment*> ownedApartments;
+	std::list<int> ownedApartmentsIds;
+	std::list<Apartment*> getOwnedApartments();
 
 	Host(DataItem* dataItem);
 	Host(User user) : User(user) {
@@ -58,7 +70,8 @@ public:
 class Traveler : public User
 {
 public:
-	std::list<BookedApartment*> bookedApartments;
+	std::list<int> bookedApartmentIds;
+	std::list<BookedApartment*> getBookedApartments();
 
 	Traveler(DataItem* dataItem);
 	Traveler(User user) : User(user) {
