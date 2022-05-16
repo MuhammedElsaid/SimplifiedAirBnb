@@ -11,12 +11,34 @@ Apartment::Apartment(DataItem* dataItem) {
 	this->price = stod(dataItem->at("Price"));
 	this->capacity = stod(dataItem->at("Capacity"));
 
-	for (auto bookedIdStr : dataItem->getListValues("BookedIDs")) {
+	for (auto bookedIdStr : dataItem->getListValues("BookedIDs"))
+		bookedApartmentsIDs.push_back(stoi(bookedIdStr));
+	
+}
 
-		for (auto bookedApartment : Global::BookedApartments->getValues()) 
-			if (bookedApartment->bookingID == stoi(bookedIdStr))
-				bookedIDs.push_back(bookedApartment);
+Apartment::Apartment(std::string address, std::string city, int availableRooms, double capacity, double price)
+{
+	this->ID = Global::getNextId();
+
+	this->address = address;
+	this->city = city;
+	this->availableRooms = availableRooms;
+	this->capacity = capacity;
+	this->price = price;
+}
+
+std::list<BookedApartment*> Apartment::getBookedApartments()
+{
+	std::list<BookedApartment*> bookedApartments;
+
+	for (auto bookedId : bookedApartmentsIDs) {
+
+		for (auto bookedApartment : Global::BookedApartments->getValues())
+			if (bookedApartment->ID == bookedId)
+				bookedApartments.push_back(bookedApartment);
 	}
+	
+	return bookedApartments;
 }
 
 DataItem* Apartment::Serialize() {
@@ -31,8 +53,8 @@ DataItem* Apartment::Serialize() {
 	dataItem->AddField("Capacity", std::to_string(this->capacity));
 
 	std::list<std::string> bookIdsStr;
-	for (auto bookId : bookedIDs) 
-		bookIdsStr.push_back(std::to_string(bookId->bookingID));
+	for (auto bookId : bookedApartmentsIDs) 
+		bookIdsStr.push_back(std::to_string(bookId));
 
 	dataItem->AddField("BookedIDs", bookIdsStr);
 	return dataItem;
@@ -41,37 +63,45 @@ DataItem* Apartment::Serialize() {
 DataItem* Serializable::Serialize() {
 	return nullptr;
 }
-template<class T>
-const std::list<T*> DataSet<T>::getValues() {
-	return values;
-}
 
 BookedApartment::BookedApartment(DataItem* dataItem) {
 
-	this->bookingID = stoi(dataItem->at("BookingId"));
+	this->ID = stoi(dataItem->at("BookingId"));
 	this->numberOfDays = stoi(dataItem->at("NumberOfDays"));
-
-	for (auto bookedApartment : Global::Apartments->getValues()) {
-		if (bookedApartment->ID == stoi(dataItem->at("ApartmentId"))) {
-			this->apartment = bookedApartment;
-			break;
-		}
-	}
-
+	this->apartmentID = stoi(dataItem->at("ApartmentId"));
 	this->startDate = stoll(dataItem->at("StartDate"));
+}
+
+BookedApartment::BookedApartment(int apartmentId, long long startDate, int numberOfDays)
+{
+	this->ID = Global::getNextId();
+
+	this->apartmentID = apartmentID;
+	this->startDate = startDate;
+	this->numberOfDays = numberOfDays;
 }
 
 double BookedApartment::CalculateTotalPrice() {
 
-	return numberOfDays * apartment->price;
+	return numberOfDays * getApartment()->price;
+}
+
+Apartment* BookedApartment::getApartment()
+{
+	for (auto bookedApartment : Global::Apartments->getValues()) {
+		if (bookedApartment->ID == apartmentID) {
+			return bookedApartment;
+		}
+	}
+	return nullptr;
 }
 
 DataItem* BookedApartment::Serialize() {
 
 	auto dataItem = new DataItem;
 
-	dataItem->AddField("BookingId", std::to_string(bookingID));
-	dataItem->AddField("ApartmentId", std::to_string(apartment->ID));
+	dataItem->AddField("BookingId", std::to_string(ID));
+	dataItem->AddField("ApartmentId", std::to_string(apartmentID));
 	dataItem->AddField("StartDate", std::to_string(startDate));
 	dataItem->AddField("NumberOfDays", std::to_string(numberOfDays));
 

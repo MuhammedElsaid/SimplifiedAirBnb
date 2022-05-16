@@ -13,6 +13,8 @@ class Apartment : public Serializable
 public:
 
 	Apartment(DataItem* dataItem);
+	Apartment(std::string address, std::string city, int availableRooms, double capacity, double price);
+
 	static const std::list<Apartment*>& searchByPrice(double givenPrice);
 	static const std::list<Apartment*>& searchByCity(std::string givenCity);
 	static const std::list<Apartment*>& getApartments();
@@ -24,7 +26,8 @@ public:
 	double capacity;
 	double price;
 
-	std::list<BookedApartment*> bookedIDs;
+	std::list<BookedApartment*> getBookedApartments();
+	std::list<int> bookedApartmentsIDs;
 
 	DataItem* Serialize() override;
 };
@@ -33,11 +36,14 @@ class BookedApartment : public Serializable
 {
 public:
 	BookedApartment(DataItem* dataItem);
-	double CalculateTotalPrice();
-	
-	int bookingID;
+	BookedApartment(int apartmentId, long long startDate, int numberOfDays);
 
-	Apartment* apartment;
+	double CalculateTotalPrice();
+
+	Apartment* getApartment();
+	
+	int ID;
+	int apartmentID;
 	long long startDate;
 	int numberOfDays;
 

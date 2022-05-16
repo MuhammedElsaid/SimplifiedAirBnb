@@ -7,11 +7,6 @@ TravelerDataSet* Global::Travelers;
 HostDataSet* Global::Hosts;
 int Global::currentIdCount;
 
-template<class T> DataSet<T>::DataSet(std::string path)
-{
-	this->path = path;
-}
-
 void Global::LoadSets()
 {
 	Apartments = new ApartmentDataSet;

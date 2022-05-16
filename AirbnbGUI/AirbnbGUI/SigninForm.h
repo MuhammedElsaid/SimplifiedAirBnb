@@ -230,11 +230,15 @@ namespace AirbnbGUI {
 
 			isSignIn = true;
 		}
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		Traveler* traveler = new Traveler({ "Muhammed", "Muhammed@exmpale.com", "Male", 10 });
-		Global::LoadSets();
-		Global::Travelers->Push(traveler);
-	}
+		private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+
+			Traveler* traveler = new Traveler({ "Muhammed", "Muhammed@exmpale.com", "Male", 21 });
+			Global::LoadSets();
+			auto values = Global::Travelers->getValues();
+			//Global::Travelers->Push(traveler);
+			//Global::Travelers->Save();
+			
+		}
 };
 }

@@ -3,27 +3,6 @@
 #include <filesystem>
 #include <fstream>
 
-template<class T> void DataSet<T>::Save()
-{
-	std::ofstream fileStream;
-	fileStream.open(path, std::ofstream::out | std::ofstream::trunc);
-
-	for (auto value : values) {
-
-		for (auto key : *((Serializable*)value)->Serialize())
-			fileStream << key.first << "=" << key.second << std::endl;
-
-		fileStream << "-" << std::endl;
-	}
-
-	fileStream.close();
-}
-
-template<class T> DataSet<T>::DataSet(std::string path)
-{
-	this->path = path;
-}
-
 template<class T> DataItem* DataSet<T>::searchForDataItem(DataItem* dataItem) {
 
 	DataItem* currentDataItem = nullptr;
@@ -40,54 +19,6 @@ template<class T> DataItem* DataSet<T>::searchForDataItem(DataItem* dataItem) {
 	}
 
 	return currentDataItem;
-}
-
-template<class T>
-std::list<DataItem*>& DataSet<T>::Open() {
-	
-	std::list<DataItem*> dataItems;
-
-	std::ifstream fileStream(path);
-	if (!fileStream) {
-		std::ofstream outFileStream(path, std::ofstream::out);
-		outFileStream.close();
-		return;
-	}
-
-	std::string currentLine;
-
-	DataItem* currentDataItem = new DataItem();
-
-	while (std::getline(fileStream, currentLine)) {
-		if (currentLine == "-") {
-			this->items.push_back(currentDataItem);
-
-			currentDataItem = new DataItem();
-			continue;
-		}
-
-		size_t deliPos = currentLine.find("=");
-
-		std::string key = currentLine.substr(0, deliPos);
-		std::string value = currentLine.substr(deliPos + 1, currentLine.length());
-
-		currentDataItem->insert({ key, value });
-	}
-
-	fileStream.close();
-	return items;
-}
-
-template<class T>
-void DataSet<T>::Close() {
-
-	for (auto item : items)
-		delete item;
-}
-
-template<class T>
-const std::list<T*> DataSet<T>::getValues() {
-	return values;
 }
 
 void DataItem::AddField(std::string key, std::string value)

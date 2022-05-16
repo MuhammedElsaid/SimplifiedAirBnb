@@ -1,11 +1,6 @@
 #include "User.h"
 #include "DataSets.h"
 
-template<class T>
-const std::list<T*> DataSet<T>::getValues() {
-	return values;
-}
-
 User::User(DataItem* dataItem) {
 
 	this->UserId = stoi(dataItem->at("UserId"));
@@ -74,7 +69,7 @@ DataItem* Traveler::Serialize() {
 
 	std::list<std::string> bookedApartmentsIds;
 	for (auto bookedApartment : this->bookedApartments)
-		bookedApartmentsIds.push_back(std::to_string(bookedApartment->bookingID));
+		bookedApartmentsIds.push_back(std::to_string(bookedApartment->ID));
 
 	baseDataItem->AddField("BookedIds", bookedApartmentsIds);
 
@@ -90,7 +85,7 @@ Traveler::Traveler(DataItem* dataItem) : User(dataItem) {
 		int apartmentId = stoi(id);
 
 		for (auto bookedApartment : Global::BookedApartments->getValues())
-			if (bookedApartment->bookingID == apartmentId)
+			if (bookedApartment->ID == apartmentId)
 				this->bookedApartments.push_back(bookedApartment);
 	}
 }
