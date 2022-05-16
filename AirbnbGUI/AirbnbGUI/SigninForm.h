@@ -1,6 +1,7 @@
 #pragma once
 #include "User.h"
 #include "DataSets.h"
+#include <msclr\marshal_cppstd.h>
 
 namespace AirbnbGUI {
 
@@ -10,6 +11,7 @@ namespace AirbnbGUI {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace msclr::interop;
 
 	
 	/// <summary>
@@ -20,6 +22,8 @@ namespace AirbnbGUI {
 		public:
 		SigninForm(void) {
 			InitializeComponent();
+
+			Global::LoadSets();
 		}
 
 		
@@ -233,8 +237,7 @@ namespace AirbnbGUI {
 
 		private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 
-			Traveler* traveler = new Traveler({ "Muhammed", "Muhammed@exmpale.com", "Male", 21 });
-			Global::LoadSets();
+			Traveler* traveler = new Traveler({ marshal_as<std::string>(textBox1->Text), marshal_as<std::string>(textBox1->Text) + "@exmpale.com", "Male", 21 });
 			auto values = Global::Travelers->getValues();
 			//Global::Travelers->Push(traveler);
 			//Global::Travelers->Save();

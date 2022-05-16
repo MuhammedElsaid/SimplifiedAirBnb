@@ -3,11 +3,14 @@
 
 User::User(DataItem* dataItem) {
 
-	this->UserId = stoi(dataItem->at("UserId"));
+	this->ID = stoi(dataItem->at("ID"));
 	this->fullName = dataItem->at("FullName");
 	this->email = dataItem->at("Email");
 	this->gender = dataItem->at("Gender");
 	this->age = stoi(dataItem->at("Age"));
+
+	//Doesn't check out :)
+	Global::getNextId();
 }
 
 User::User(std::string fullName, std::string email, std::string gender, int age)
@@ -18,13 +21,13 @@ User::User(std::string fullName, std::string email, std::string gender, int age)
 	this->gender = gender;
 	this->age = age;
 
-	this->UserId = Global::getNextId();
+	this->ID = Global::getNextId();
 }
 
 
 DataItem* User::Serialize() {
 	auto dataItem = new DataItem;
-	dataItem->AddField("UserId", std::to_string(this->UserId));
+	dataItem->AddField("ID", std::to_string(this->ID));
 	dataItem->AddField("FullName", this->fullName);
 	dataItem->AddField("Email", this->email);
 	dataItem->AddField("Gender", this->gender);

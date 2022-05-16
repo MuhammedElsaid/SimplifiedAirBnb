@@ -25,8 +25,8 @@ void DataItem::AddField(std::string key, std::string value)
 {
 	this->insert({ key, value });
 }
-const std::string space_delimiter = ",";
 
+const std::string space_delimiter = ",";
 void DataItem::AddField(std::string key, std::list<std::string> values) {
 
 	std::string str = "";

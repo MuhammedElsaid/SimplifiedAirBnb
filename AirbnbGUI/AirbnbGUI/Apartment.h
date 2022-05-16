@@ -19,7 +19,6 @@ public:
 	static const std::list<Apartment*>& searchByCity(std::string givenCity);
 	static const std::list<Apartment*>& getApartments();
 
-	int ID;
 	std::string address;
 	std::string city;
 	int availableRooms;
@@ -42,7 +41,6 @@ public:
 
 	Apartment* getApartment();
 	
-	int ID;
 	int apartmentID;
 	long long startDate;
 	int numberOfDays;

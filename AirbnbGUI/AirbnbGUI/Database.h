@@ -20,6 +20,7 @@ public:
 class Serializable
 {
 public:
+	int ID;
 	virtual DataItem* Serialize();
 };
 

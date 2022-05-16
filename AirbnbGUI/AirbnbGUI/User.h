@@ -13,7 +13,6 @@ class BookedApartment;
 class User : public Serializable
 {
 public:
-	int UserId;
 	std::string fullName;
 	std::string email;
 	std::string gender;
