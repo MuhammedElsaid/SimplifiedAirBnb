@@ -10,5 +10,4 @@ void main(array<String^>^ args) {
 	Application::SetCompatibleTextRenderingDefault(false);
 	SigninForm form;
 	Application::Run(%form);
-
 }
