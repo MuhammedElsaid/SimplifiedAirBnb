@@ -26,9 +26,6 @@ public:
 	double capacity;
 	double price;
 
-	std::list<BookedApartment*> getBookedApartments();
-	std::list<int> bookedApartmentsIDs;
-
 	DataItem* Serialize() override;
 };
 
@@ -36,7 +33,7 @@ class BookedApartment : public Serializable
 {
 public:
 	BookedApartment(DataItem* dataItem);
-	BookedApartment(int apartmentId, long long startDate, int numberOfDays);
+	BookedApartment(int apartmentId, std::string startDate, int numberOfDays);
 
 	double CalculateTotalPrice();
 

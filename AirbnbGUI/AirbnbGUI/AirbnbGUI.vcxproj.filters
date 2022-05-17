@@ -30,9 +30,6 @@
     <ClCompile Include="DataSets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AdminPanel.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="Admin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

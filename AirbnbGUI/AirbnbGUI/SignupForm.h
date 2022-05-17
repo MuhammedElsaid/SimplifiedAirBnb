@@ -77,16 +77,6 @@ namespace AirbnbGUI {
 		protected:
 
 
-
-
-
-
-
-
-
-
-
-
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -362,6 +352,7 @@ namespace AirbnbGUI {
 				if (user->email == emailStr) {
 					emailTextBox->Focus();
 					System::Windows::Forms::MessageBox::Show("A user with that email already exists!! Try another email.");
+					return;
 				}
 			}
 

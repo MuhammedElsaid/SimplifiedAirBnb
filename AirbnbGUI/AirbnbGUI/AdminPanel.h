@@ -36,8 +36,14 @@ namespace AirbnbGUI {
 			for (auto apartment : *Global::Apartments->getValues())
 				apartmentDataSource->Add(gcnew ApartmentDataCell(apartment));
 
+			auto bookedApartmentDataSource = gcnew System::ComponentModel::BindingList<BookedApartmentDataCell^>();
+
+			for (auto bookedApartment : *Global::BookedApartments->getValues())
+				bookedApartmentDataSource->Add(gcnew BookedApartmentDataCell(bookedApartment));
+
 			userDataGrid->DataSource = userDataSource;
 			apartmentDataGridView->DataSource = apartmentDataSource;
+			bookedApartmentDataGridView->DataSource = bookedApartmentDataSource;
 		}
 
 	protected:
@@ -304,6 +310,7 @@ namespace AirbnbGUI {
 			break;
 		}
 	}
+
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 
 		auto selectedRows = apartmentDataGridView->SelectedRows;

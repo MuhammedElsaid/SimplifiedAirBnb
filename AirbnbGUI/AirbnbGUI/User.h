@@ -78,6 +78,7 @@ public:
 		//Don't need to anyway
 		userType = UserType::Traveler;
 	}
+
 	DataItem* Serialize() override;
 };
 

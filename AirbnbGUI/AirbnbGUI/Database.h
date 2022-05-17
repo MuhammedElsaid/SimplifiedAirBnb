@@ -43,7 +43,6 @@ public:
 		}
 
 		fileStream.close();
-	
 	}
 
 	void Push(T* item) {

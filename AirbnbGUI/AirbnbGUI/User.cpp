@@ -34,7 +34,6 @@ DataItem* User::Serialize() {
 
 std::list<Apartment*> Host::getOwnedApartments()
 {
-
 	std::list<Apartment*> ownedApartments;
 
 	for (auto apartmentId : ownedApartmentsIds)
@@ -88,7 +87,6 @@ DataItem* Traveler::Serialize() {
 
 std::list<BookedApartment*> Traveler::getBookedApartments()
 {
-
 	std::list<BookedApartment*> bookedApartments;
 
 	for (auto bookedApartmentId : bookedApartmentIds)

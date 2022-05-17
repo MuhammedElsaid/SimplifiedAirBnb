@@ -29,8 +29,6 @@ namespace AirbnbGUI {
 		SigninForm(void) {
 
 			InitializeComponent();
-			accountTypeComboBox->SelectedIndex = 0;
-			accountTypeComboBox->DropDownStyle = ComboBoxStyle::DropDownList;
 		}
 
 		
@@ -62,11 +60,11 @@ namespace AirbnbGUI {
 
 		private: System::Windows::Forms::PictureBox^ pictureBox1;
 		private: System::Windows::Forms::Label^ label4;
-		private: System::Windows::Forms::ComboBox^ accountTypeComboBox;
 
 
 
-		private: System::Windows::Forms::Label^ label3;
+
+
 
 
 	private:
@@ -90,8 +88,6 @@ namespace AirbnbGUI {
 			this->SignInButton = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->accountTypeComboBox = (gcnew System::Windows::Forms::ComboBox());
-			this->label3 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -99,7 +95,7 @@ namespace AirbnbGUI {
 			// 
 			this->emailTextBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->emailTextBox->Location = System::Drawing::Point(40, 305);
+			this->emailTextBox->Location = System::Drawing::Point(45, 267);
 			this->emailTextBox->Name = L"emailTextBox";
 			this->emailTextBox->Size = System::Drawing::Size(285, 22);
 			this->emailTextBox->TabIndex = 0;
@@ -108,7 +104,7 @@ namespace AirbnbGUI {
 			// 
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8));
-			this->label1->Location = System::Drawing::Point(37, 282);
+			this->label1->Location = System::Drawing::Point(42, 244);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(46, 17);
 			this->label1->TabIndex = 1;
@@ -118,7 +114,7 @@ namespace AirbnbGUI {
 			// 
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8));
-			this->label2->Location = System::Drawing::Point(37, 351);
+			this->label2->Location = System::Drawing::Point(42, 313);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(73, 17);
 			this->label2->TabIndex = 3;
@@ -128,7 +124,7 @@ namespace AirbnbGUI {
 			// 
 			this->passwordTextBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->passwordTextBox->Location = System::Drawing::Point(40, 374);
+			this->passwordTextBox->Location = System::Drawing::Point(45, 336);
 			this->passwordTextBox->Name = L"passwordTextBox";
 			this->passwordTextBox->Size = System::Drawing::Size(285, 22);
 			this->passwordTextBox->TabIndex = 2;
@@ -137,7 +133,7 @@ namespace AirbnbGUI {
 			// signUpLinkLabel
 			// 
 			this->signUpLinkLabel->AutoSize = true;
-			this->signUpLinkLabel->Location = System::Drawing::Point(138, 416);
+			this->signUpLinkLabel->Location = System::Drawing::Point(143, 378);
 			this->signUpLinkLabel->Name = L"signUpLinkLabel";
 			this->signUpLinkLabel->Size = System::Drawing::Size(52, 16);
 			this->signUpLinkLabel->TabIndex = 4;
@@ -171,39 +167,17 @@ namespace AirbnbGUI {
 			// 
 			this->label4->AutoSize = true;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8));
-			this->label4->Location = System::Drawing::Point(35, 417);
+			this->label4->Location = System::Drawing::Point(40, 379);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(105, 17);
 			this->label4->TabIndex = 9;
 			this->label4->Text = L"Not a member\?";
-			// 
-			// accountTypeComboBox
-			// 
-			this->accountTypeComboBox->DisplayMember = L"Traveler";
-			this->accountTypeComboBox->FormattingEnabled = true;
-			this->accountTypeComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Traveler", L"Host", L"Administrator" });
-			this->accountTypeComboBox->Location = System::Drawing::Point(40, 236);
-			this->accountTypeComboBox->Name = L"accountTypeComboBox";
-			this->accountTypeComboBox->Size = System::Drawing::Size(284, 24);
-			this->accountTypeComboBox->TabIndex = 11;
-			// 
-			// label3
-			// 
-			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8));
-			this->label3->Location = System::Drawing::Point(37, 211);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(99, 17);
-			this->label3->TabIndex = 12;
-			this->label3->Text = L"Account Type:";
 			// 
 			// SigninForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(382, 653);
-			this->Controls->Add(this->label3);
-			this->Controls->Add(this->accountTypeComboBox);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->SignInButton);
@@ -228,7 +202,6 @@ namespace AirbnbGUI {
 
 			DataItem* signinInfo = new DataItem;
 			
-			signinInfo->AddField("UserType", std::to_string(accountTypeComboBox->SelectedIndex));
 			signinInfo->AddField("Email", emailStr);
 			auto result = Global::Users->searchForDataItem(signinInfo);
 
@@ -261,13 +234,13 @@ namespace AirbnbGUI {
 
 				ThreadStart^ threadStart;
 
-				if (accountTypeComboBox->SelectedIndex == 0)
+				if ((int)Global::Users->currentSignedInUser->userType == 0)
 					threadStart = gcnew ThreadStart(threadStartApartmentSearch);
 
-				else if (accountTypeComboBox->SelectedIndex == 1)
+				else if ((int)Global::Users->currentSignedInUser->userType == 1)
 					threadStart = gcnew ThreadStart(threadStartApartmentForm);
 
-				else if (accountTypeComboBox->SelectedIndex == 2)
+				else if ((int)Global::Users->currentSignedInUser->userType == 2)
 					threadStart = gcnew ThreadStart(threadStartAdminPanel);
 
 				Thread^ apartmentApplication = gcnew Thread(threadStart);
