@@ -80,6 +80,7 @@ namespace AirbnbGUI {
 		}
 		AdminPanel(void)
 		{
+
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
@@ -104,7 +105,16 @@ namespace AirbnbGUI {
 			apartmentDataGridView->DataSource = apartmentDataSource;
 			bookedApartmentDataGridView->DataSource = bookedApartmentDataSource;
 
-			updateCharts();
+
+			try {
+				updateCharts();
+
+			}
+			catch (System::Exception^ ex) {
+
+				System::Windows::Forms::MessageBox::Show(ex->Message);
+
+			}
 		}
 
 	protected:
