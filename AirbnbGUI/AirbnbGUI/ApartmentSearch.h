@@ -25,6 +25,7 @@ namespace AirbnbGUI {
 		{
 			InitializeComponent();
 
+			this->Text = "Welcome " + gcnew String(Global::Users->currentSignedInUser->fullName.c_str());
 			searchListView->View = View::Details;
 			searchListView->FullRowSelect = true;
 			searchListView->MultiSelect = false;

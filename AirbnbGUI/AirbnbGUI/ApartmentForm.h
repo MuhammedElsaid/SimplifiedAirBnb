@@ -3,6 +3,7 @@
 #include "DataSets.h"
 #include "Apartment.h"
 #include <msclr\marshal_cppstd.h>
+#include "UserInfo.h"
 
 namespace AirbnbGUI {
 
@@ -26,6 +27,8 @@ namespace AirbnbGUI {
 			//
 			//TODO: Add the constructor code here
 			//
+
+			this->Text = "Welcome " + gcnew String(Global::Users->currentSignedInUser->fullName.c_str());
 		}
 
 	protected:
@@ -58,6 +61,7 @@ namespace AirbnbGUI {
 		private: System::Windows::Forms::Label^ label6;
 		private: System::Windows::Forms::PictureBox^ pictureBox1;
 		private: System::Windows::Forms::Button^ button1;
+		private: System::Windows::Forms::LinkLabel^ myApartmentsLinkLabel;
 
 
 
@@ -89,6 +93,7 @@ namespace AirbnbGUI {
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->myApartmentsLinkLabel = (gcnew System::Windows::Forms::LinkLabel());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->availableRoomsBox))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->capacityBox))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->priceBox))->BeginInit();
@@ -227,11 +232,23 @@ namespace AirbnbGUI {
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &ApartmentForm::button1_Click);
 			// 
+			// myApartmentsLinkLabel
+			// 
+			this->myApartmentsLinkLabel->AutoSize = true;
+			this->myApartmentsLinkLabel->Location = System::Drawing::Point(632, 9);
+			this->myApartmentsLinkLabel->Name = L"myApartmentsLinkLabel";
+			this->myApartmentsLinkLabel->Size = System::Drawing::Size(95, 16);
+			this->myApartmentsLinkLabel->TabIndex = 14;
+			this->myApartmentsLinkLabel->TabStop = true;
+			this->myApartmentsLinkLabel->Text = L"My apartments";
+			this->myApartmentsLinkLabel->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &ApartmentForm::myApartmentsLinkLabel_LinkClicked);
+			// 
 			// ApartmentForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(748, 501);
+			this->Controls->Add(this->myApartmentsLinkLabel);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->priceBox);
@@ -282,5 +299,13 @@ namespace AirbnbGUI {
 
 			cityTextBox->Focus();
 		}
+	private: System::Void myApartmentsLinkLabel_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+
+		this->Hide();
+
+		auto userInfo = gcnew UserInfo();
+
+		userInfo->Show();
+	}
 };
 }

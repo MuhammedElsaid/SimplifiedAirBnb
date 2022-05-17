@@ -31,9 +31,9 @@ namespace AirbnbGUI {
 
 			for (User* user : *Global::Users->getValues()) {
 
-				if ((int)user->userType == 0)
+				if ((int)user->userType == User::Traveler)
 					travelersCount++;
-				else if ((int)user->userType == 1)
+				else if ((int)user->userType == User::Host)
 					hostCount++;
 
 				if (!agesDic->ContainsKey(user->age))
@@ -55,10 +55,25 @@ namespace AirbnbGUI {
 
 			for (Apartment* apartment : *Global::Apartments->getValues()) {
 
+				auto enumrator = priceDic->Keys->GetEnumerator();
+				while (enumrator.MoveNext()) {
+				}
+
+				if (apartment->price > enumrator.Current) {
+
+					if (!priceDic->ContainsKey(apartment->price))
+						priceDic->Add(apartment->price, 1);
+					else
+						priceDic[apartment->price] += 1;
+					continue;
+				}
+
 				for (auto priceKey : prices) {
 
-					if (apartment->price < priceKey)
+					if (apartment->price <= priceKey) {
 						priceDic[priceKey] += 1;
+						break;	
+					}
 				}
 			}
 
@@ -106,15 +121,15 @@ namespace AirbnbGUI {
 			bookedApartmentDataGridView->DataSource = bookedApartmentDataSource;
 
 
-			try {
-				updateCharts();
-
-			}
-			catch (System::Exception^ ex) {
-
-				System::Windows::Forms::MessageBox::Show(ex->Message);
-
-			}
+			//try {
+			//	updateCharts();
+			//
+			//}
+			//catch (System::Exception^ ex) {
+			//
+			//	System::Windows::Forms::MessageBox::Show(ex->Message);
+			//
+			//}
 		}
 
 	protected:
@@ -413,7 +428,7 @@ namespace AirbnbGUI {
 			series11->YValueType = System::Windows::Forms::DataVisualization::Charting::ChartValueType::Int32;
 			series12->ChartArea = L"ChartArea1";
 			series12->Legend = L"Legend1";
-			series12->Name = L"Hosts";
+			series12->Name = L"Host";
 			series12->XValueType = System::Windows::Forms::DataVisualization::Charting::ChartValueType::String;
 			series12->YValueType = System::Windows::Forms::DataVisualization::Charting::ChartValueType::Int32;
 			this->userTypeChart->Series->Add(series11);

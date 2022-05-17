@@ -13,7 +13,8 @@ class BookedApartment;
 
 class User : public Serializable
 {
-protected:
+public:
+
 	enum UserType
 	{
 		Traveler = 0,
@@ -21,7 +22,6 @@ protected:
 		Admin = 2
 	};
 
-public:
 	UserType userType;
 	std::string fullName;
 	std::string email;

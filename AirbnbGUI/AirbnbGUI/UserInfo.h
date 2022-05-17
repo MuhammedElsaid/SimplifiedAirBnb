@@ -20,27 +20,55 @@ namespace AirbnbGUI {
 		{
 			InitializeComponent();
 
-			bookedApartmentsListview->View = View::Details;
-			bookedApartmentsListview->FullRowSelect = true;
-			bookedApartmentsListview->MultiSelect = false;
-			bookedApartmentsListview->Columns->Add("City", 90);
-			bookedApartmentsListview->Columns->Add("Address", 150);
-			bookedApartmentsListview->Columns->Add("Price", 90);
-			bookedApartmentsListview->Columns->Add("Number of rooms", 90);
+			listview->View = View::Details;
+			listview->FullRowSelect = true;
+			listview->MultiSelect = false;
+			listview->Columns->Add("City", 90);
+			listview->Columns->Add("Address", 150);
+			listview->Columns->Add("Price", 90);
+			listview->Columns->Add("Number of rooms", 90);
 
-			auto traveler = (Traveler*)Global::Users->currentSignedInUser;
+			auto user = Global::Users->currentSignedInUser;
 
-			for (auto bookedApartment : traveler->getBookedApartments()) {
 
-				auto arr = gcnew array<String^>(4);
-				auto foundApartment = bookedApartment->getApartment();
+			if (user->userType == User::Traveler) {
+				auto traveler = (Traveler*)user;
 
-				arr[0] = gcnew String(foundApartment->city.c_str());
-				arr[1] = gcnew String(foundApartment->address.c_str());
-				arr[2] = gcnew String(std::to_string((int)foundApartment->price).c_str());
-				arr[3] = gcnew String(std::to_string(foundApartment->availableRooms).c_str());
-				bookedApartmentsListview->Items->Add(gcnew ListViewItem(arr));
+				fullNameLabel->Text = "Booked Apartments";
+
+				for (auto bookedApartment : traveler->getBookedApartments()) {
+
+					auto arr = gcnew array<String^>(4);
+					auto foundApartment = bookedApartment->getApartment();
+
+					arr[0] = gcnew String(foundApartment->city.c_str());
+					arr[1] = gcnew String(foundApartment->address.c_str());
+					arr[2] = gcnew String(std::to_string((int)foundApartment->price).c_str());
+					arr[3] = gcnew String(std::to_string(foundApartment->availableRooms).c_str());
+					listview->Items->Add(gcnew ListViewItem(arr));
+				}
 			}
+			else {
+
+				auto host = (Host*)user;
+
+				fullNameLabel->Text = "Owned Apartments";
+
+
+				for (auto foundApartment : host->getOwnedApartments()) {
+
+					auto arr = gcnew array<String^>(4);
+
+					arr[0] = gcnew String(foundApartment->city.c_str());
+					arr[1] = gcnew String(foundApartment->address.c_str());
+					arr[2] = gcnew String(std::to_string((int)foundApartment->price).c_str());
+					arr[3] = gcnew String(std::to_string(foundApartment->availableRooms).c_str());
+					listview->Items->Add(gcnew ListViewItem(arr));
+				}
+
+			}
+
+			
 			//
 			//TODO: Add the constructor code here
 			//
@@ -57,12 +85,16 @@ namespace AirbnbGUI {
 				delete components;
 			}
 		}
-		private: System::Windows::Forms::Label^ label1;
-		private: System::Windows::Forms::ListView^ bookedApartmentsListview;
+		private: System::Windows::Forms::Label^ fullNameLabel;
+		private: System::Windows::Forms::ListView^ listview;
+		protected:
+
+
 		protected:
 
 		private: System::Windows::Forms::PictureBox^ pictureBox1;
-		private: System::Windows::Forms::Button^ button1;
+		private: System::Windows::Forms::Button^ deleteButton;
+
 
 	private:
 		/// <summary>
@@ -77,65 +109,65 @@ namespace AirbnbGUI {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->bookedApartmentsListview = (gcnew System::Windows::Forms::ListView());
+			this->fullNameLabel = (gcnew System::Windows::Forms::Label());
+			this->listview = (gcnew System::Windows::Forms::ListView());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->deleteButton = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
-			// label1
+			// fullNameLabel
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15));
-			this->label1->Location = System::Drawing::Point(12, 156);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(233, 29);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"Booked apartments";
+			this->fullNameLabel->AutoSize = true;
+			this->fullNameLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15));
+			this->fullNameLabel->Location = System::Drawing::Point(12, 131);
+			this->fullNameLabel->Name = L"fullNameLabel";
+			this->fullNameLabel->Size = System::Drawing::Size(134, 29);
+			this->fullNameLabel->TabIndex = 0;
+			this->fullNameLabel->Text = L"Welcome, ";
 			// 
-			// bookedApartmentsListview
+			// listview
 			// 
-			this->bookedApartmentsListview->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+			this->listview->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->bookedApartmentsListview->HideSelection = false;
-			this->bookedApartmentsListview->Location = System::Drawing::Point(12, 188);
-			this->bookedApartmentsListview->Name = L"bookedApartmentsListview";
-			this->bookedApartmentsListview->Size = System::Drawing::Size(693, 363);
-			this->bookedApartmentsListview->TabIndex = 1;
-			this->bookedApartmentsListview->UseCompatibleStateImageBehavior = false;
+			this->listview->HideSelection = false;
+			this->listview->Location = System::Drawing::Point(12, 188);
+			this->listview->Name = L"listview";
+			this->listview->Size = System::Drawing::Size(693, 363);
+			this->listview->TabIndex = 1;
+			this->listview->UseCompatibleStateImageBehavior = false;
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->ImageLocation = L"Airbnb_Logo.png";
 			this->pictureBox1->Location = System::Drawing::Point(12, 4);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(280, 137);
+			this->pictureBox1->Size = System::Drawing::Size(280, 124);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox1->TabIndex = 2;
 			this->pictureBox1->TabStop = false;
 			// 
-			// button1
+			// deleteButton
 			// 
-			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-			this->button1->Location = System::Drawing::Point(585, 557);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(120, 35);
-			this->button1->TabIndex = 3;
-			this->button1->Text = L"Delete bookinig";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &UserInfo::button1_Click);
+			this->deleteButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->deleteButton->Location = System::Drawing::Point(585, 557);
+			this->deleteButton->Name = L"deleteButton";
+			this->deleteButton->Size = System::Drawing::Size(120, 35);
+			this->deleteButton->TabIndex = 3;
+			this->deleteButton->Text = L"Delete";
+			this->deleteButton->UseVisualStyleBackColor = true;
+			this->deleteButton->Click += gcnew System::EventHandler(this, &UserInfo::button1_Click);
 			// 
 			// UserInfo
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(717, 601);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->deleteButton);
 			this->Controls->Add(this->pictureBox1);
-			this->Controls->Add(this->bookedApartmentsListview);
-			this->Controls->Add(this->label1);
+			this->Controls->Add(this->listview);
+			this->Controls->Add(this->fullNameLabel);
 			this->Name = L"UserInfo";
 			this->Text = L"UserInfo";
 			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &UserInfo::UserInfo_FormClosed);
@@ -147,20 +179,41 @@ namespace AirbnbGUI {
 #pragma endregion
 		private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 
-			auto traveler = (Traveler*)Global::Users->currentSignedInUser;
+			auto user = Global::Users->currentSignedInUser;
 			int counter = 0;
-			for (auto bookedApartment : traveler->getBookedApartments()) {
 
-				if (counter == bookedApartmentsListview->SelectedIndices[0]) {
-					Global::BookedApartments->getValues()->remove(bookedApartment);
-					Global::BookedApartments->Save();
-					bookedApartmentsListview->Items->RemoveAt(counter);
-					traveler->bookedApartmentIds.remove(bookedApartment->ID);
-					Global::Users->Save();
-					return;
+			if (user->userType == User::Traveler) {
+				auto traveler = (Traveler*)user;
+				for (auto bookedApartment : traveler->getBookedApartments()) {
+
+					if (counter == listview->SelectedIndices[0]) {
+						Global::BookedApartments->getValues()->remove(bookedApartment);
+						Global::BookedApartments->Save();
+						listview->Items->RemoveAt(counter);
+						traveler->bookedApartmentIds.remove(bookedApartment->ID);
+						Global::Users->Save();
+						return;
+					}
+
+					counter++;
 				}
+			}
+			else {
 
-				counter++;
+				auto host = (Host*)user;
+				for (auto apartment : host->getOwnedApartments()) {
+
+					if (counter == listview->SelectedIndices[0]) {
+						Global::Apartments->getValues()->remove(apartment);
+						Global::Apartments->Save();
+						listview->Items->RemoveAt(counter);
+						host->ownedApartmentsIds.remove(apartment->ID);
+						Global::Users->Save();
+						return;
+					}
+
+					counter++;
+				}
 			}
 		}
 	private: System::Void UserInfo_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {

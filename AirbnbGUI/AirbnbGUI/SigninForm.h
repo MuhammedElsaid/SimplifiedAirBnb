@@ -234,13 +234,13 @@ namespace AirbnbGUI {
 
 				ThreadStart^ threadStart;
 
-				if ((int)Global::Users->currentSignedInUser->userType == 0)
+				if ((int)Global::Users->currentSignedInUser->userType == User::Traveler)
 					threadStart = gcnew ThreadStart(threadStartApartmentSearch);
 
-				else if ((int)Global::Users->currentSignedInUser->userType == 1)
+				else if ((int)Global::Users->currentSignedInUser->userType == User::Host)
 					threadStart = gcnew ThreadStart(threadStartApartmentForm);
 
-				else if ((int)Global::Users->currentSignedInUser->userType == 2)
+				else if ((int)Global::Users->currentSignedInUser->userType == User::Admin)
 					threadStart = gcnew ThreadStart(threadStartAdminPanel);
 
 				Thread^ apartmentApplication = gcnew Thread(threadStart);
