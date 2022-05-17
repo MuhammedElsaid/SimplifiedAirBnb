@@ -1,5 +1,10 @@
-ApartmentId=9
+ApartmentId=21
 BookingId=23
-NumberOfDays=5
+NumberOfDays=1
+StartDate=17/05/2022
+-
+ApartmentId=9
+BookingId=25
+NumberOfDays=1
 StartDate=17/05/2022
 -

@@ -1,6 +1,7 @@
 #pragma once
 #include <msclr\marshal_cppstd.h>
 #include "UserInfo.h"
+#include "ApartmentInfo.h"
 
 namespace AirbnbGUI {
 
@@ -317,8 +318,8 @@ namespace AirbnbGUI {
 						auto startDate = DateTime::ParseExact(startDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr);
 						auto endDate = DateTime::ParseExact(endDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr);
 			
-						if (dateParse <= startDate && startDate >= endDateParse
-							|| dateParse <= endDate && endDate >= endDateParse) {
+						if (dateParse <= startDate && startDate <= endDateParse
+							|| dateParse <= endDate && endDate <= endDateParse) {
 			
 							tempResult.remove(foundApartment);
 							continue;
@@ -347,13 +348,20 @@ namespace AirbnbGUI {
 		for (auto apartment : currentResult) {
 
 			if (counter == searchListView->SelectedIndices[0]) {
+				
 				auto numberOfDays = (DateTime::ParseExact(endDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr) - DateTime::ParseExact(startDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr)).Days;
+				
+				ApartmentInfo^ apartmentInfo = gcnew ApartmentInfo(startDateBox->Value.ToString("dd/MM/yyyy"), endDateBox->Value.ToString("dd/MM/yyyy"), apartment);
+				auto result = apartmentInfo->ShowDialog();
+
+				if (result != System::Windows::Forms::DialogResult::OK)
+					return;
+				
 				auto bookedApartment = new BookedApartment(apartment->ID, marshal_as<std::string>(startDateBox->Value.ToString("dd/MM/yyyy")), numberOfDays);
+				
 				Global::BookedApartments->Push(bookedApartment);
 				Global::BookedApartments->Save();
-
-				System::Windows::Forms::MessageBox::Show("Apartment has been booked sucessfully!!");
-
+				
 				currentResult.clear();
 				searchListView->Items->Clear();
 
