@@ -208,7 +208,6 @@ namespace AirbnbGUI {
 			// 
 			// pictureBox1
 			// 
-			this->pictureBox1->Anchor = System::Windows::Forms::AnchorStyles::Top;
 			this->pictureBox1->ImageLocation = L"Airbnb_Logo.png";
 			this->pictureBox1->Location = System::Drawing::Point(17, 12);
 			this->pictureBox1->Name = L"pictureBox1";
@@ -275,6 +274,13 @@ namespace AirbnbGUI {
 			Global::Apartments->Push(apartment);
 			Global::Apartments->Save();
 
+			cityTextBox->Clear();
+			addressBox->Clear();
+			availableRoomsBox->Value = 1;
+			capacityBox->Value = 250;
+			priceBox->Value = 0;
+
+			cityTextBox->Focus();
 		}
 };
 }
