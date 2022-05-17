@@ -252,10 +252,11 @@ namespace AirbnbGUI {
 			// 
 			// label4
 			// 
+			this->label4->Anchor = System::Windows::Forms::AnchorStyles::Right;
 			this->label4->AutoSize = true;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label4->Location = System::Drawing::Point(457, 450);
+			this->label4->Location = System::Drawing::Point(504, 450);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(127, 24);
 			this->label4->TabIndex = 10;
@@ -263,21 +264,23 @@ namespace AirbnbGUI {
 			// 
 			// label3
 			// 
+			this->label3->Anchor = System::Windows::Forms::AnchorStyles::Right;
 			this->label3->AutoSize = true;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label3->Location = System::Drawing::Point(457, 411);
+			this->label3->Location = System::Drawing::Point(504, 411);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(183, 24);
+			this->label3->Size = System::Drawing::Size(147, 24);
 			this->label3->TabIndex = 9;
-			this->label3->Text = L"Booked apartments:";
+			this->label3->Text = L"Bookings made:";
 			// 
 			// label2
 			// 
+			this->label2->Anchor = System::Windows::Forms::AnchorStyles::Right;
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->Location = System::Drawing::Point(457, 372);
+			this->label2->Location = System::Drawing::Point(504, 372);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(211, 24);
 			this->label2->TabIndex = 8;
@@ -285,10 +288,11 @@ namespace AirbnbGUI {
 			// 
 			// label1
 			// 
+			this->label1->Anchor = System::Windows::Forms::AnchorStyles::Right;
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(457, 336);
+			this->label1->Location = System::Drawing::Point(504, 336);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(106, 24);
 			this->label1->TabIndex = 7;
@@ -296,10 +300,11 @@ namespace AirbnbGUI {
 			// 
 			// moneySpentLabel
 			// 
+			this->moneySpentLabel->Anchor = System::Windows::Forms::AnchorStyles::Right;
 			this->moneySpentLabel->AutoSize = true;
 			this->moneySpentLabel->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->moneySpentLabel->Location = System::Drawing::Point(619, 450);
+			this->moneySpentLabel->Location = System::Drawing::Point(666, 450);
 			this->moneySpentLabel->Name = L"moneySpentLabel";
 			this->moneySpentLabel->Size = System::Drawing::Size(21, 24);
 			this->moneySpentLabel->TabIndex = 6;
@@ -307,10 +312,11 @@ namespace AirbnbGUI {
 			// 
 			// bookedApartmentsLabel
 			// 
+			this->bookedApartmentsLabel->Anchor = System::Windows::Forms::AnchorStyles::Right;
 			this->bookedApartmentsLabel->AutoSize = true;
 			this->bookedApartmentsLabel->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->bookedApartmentsLabel->Location = System::Drawing::Point(680, 411);
+			this->bookedApartmentsLabel->Location = System::Drawing::Point(694, 411);
 			this->bookedApartmentsLabel->Name = L"bookedApartmentsLabel";
 			this->bookedApartmentsLabel->Size = System::Drawing::Size(21, 24);
 			this->bookedApartmentsLabel->TabIndex = 5;
@@ -318,10 +324,11 @@ namespace AirbnbGUI {
 			// 
 			// totalApartmentsLabel
 			// 
+			this->totalApartmentsLabel->Anchor = System::Windows::Forms::AnchorStyles::Right;
 			this->totalApartmentsLabel->AutoSize = true;
 			this->totalApartmentsLabel->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->totalApartmentsLabel->Location = System::Drawing::Point(707, 372);
+			this->totalApartmentsLabel->Location = System::Drawing::Point(744, 372);
 			this->totalApartmentsLabel->Name = L"totalApartmentsLabel";
 			this->totalApartmentsLabel->Size = System::Drawing::Size(21, 24);
 			this->totalApartmentsLabel->TabIndex = 4;
@@ -329,10 +336,11 @@ namespace AirbnbGUI {
 			// 
 			// totalUsersLabel
 			// 
+			this->totalUsersLabel->Anchor = System::Windows::Forms::AnchorStyles::Right;
 			this->totalUsersLabel->AutoSize = true;
 			this->totalUsersLabel->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->totalUsersLabel->Location = System::Drawing::Point(590, 336);
+			this->totalUsersLabel->Location = System::Drawing::Point(637, 336);
 			this->totalUsersLabel->Name = L"totalUsersLabel";
 			this->totalUsersLabel->Size = System::Drawing::Size(21, 24);
 			this->totalUsersLabel->TabIndex = 3;
@@ -340,6 +348,9 @@ namespace AirbnbGUI {
 			// 
 			// apartmentPricesChart
 			// 
+			this->apartmentPricesChart->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			chartArea7->Name = L"ChartArea1";
 			this->apartmentPricesChart->ChartAreas->Add(chartArea7);
 			legend7->Name = L"Legend1";
@@ -349,15 +360,17 @@ namespace AirbnbGUI {
 			series9->ChartArea = L"ChartArea1";
 			series9->LabelForeColor = System::Drawing::Color::Transparent;
 			series9->Legend = L"Legend1";
-			series9->Name = L"Price";
+			series9->Name = L"Price per night";
 			series9->XValueType = System::Windows::Forms::DataVisualization::Charting::ChartValueType::String;
 			series9->YValueType = System::Windows::Forms::DataVisualization::Charting::ChartValueType::Int32;
 			this->apartmentPricesChart->Series->Add(series9);
-			this->apartmentPricesChart->Size = System::Drawing::Size(398, 305);
+			this->apartmentPricesChart->Size = System::Drawing::Size(492, 305);
 			this->apartmentPricesChart->TabIndex = 2;
 			// 
 			// ageChart
 			// 
+			this->ageChart->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			chartArea8->Name = L"ChartArea1";
 			this->ageChart->ChartAreas->Add(chartArea8);
 			legend8->Name = L"Legend1";

@@ -96,6 +96,9 @@ namespace AirbnbGUI {
 			// 
 			// bookedApartmentsListview
 			// 
+			this->bookedApartmentsListview->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->bookedApartmentsListview->HideSelection = false;
 			this->bookedApartmentsListview->Location = System::Drawing::Point(12, 188);
 			this->bookedApartmentsListview->Name = L"bookedApartmentsListview";
@@ -115,6 +118,7 @@ namespace AirbnbGUI {
 			// 
 			// button1
 			// 
+			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->button1->Location = System::Drawing::Point(585, 557);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(120, 35);

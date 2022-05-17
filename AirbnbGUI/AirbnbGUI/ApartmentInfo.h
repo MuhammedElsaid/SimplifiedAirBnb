@@ -309,7 +309,7 @@ namespace AirbnbGUI {
 			this->Controls->Add(this->bookButton);
 			this->Controls->Add(this->pictureBox1);
 			this->Name = L"ApartmentInfo";
-			this->Text = L"ApartmentInfo";
+			this->Text = L"Book Info";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
