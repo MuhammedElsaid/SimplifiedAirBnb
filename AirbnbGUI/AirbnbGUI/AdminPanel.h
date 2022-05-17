@@ -12,6 +12,7 @@ namespace AirbnbGUI {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Windows::Forms::DataVisualization::Charting;
 
 	/// <summary>
 	/// Summary for AdminPanel
@@ -19,6 +20,64 @@ namespace AirbnbGUI {
 	public ref class AdminPanel : public System::Windows::Forms::Form
 	{
 	public:
+
+		public: void updateCharts() {
+
+			int travelersCount = 0;
+			int hostCount = 0;
+
+			auto agesDic = gcnew System::Collections::Generic::Dictionary<Int32, Int32>();
+
+
+			for (User* user : *Global::Users->getValues()) {
+
+				if ((int)user->userType == 0)
+					travelersCount++;
+				else if ((int)user->userType == 1)
+					hostCount++;
+
+				if (!agesDic->ContainsKey(user->age))
+					agesDic->Add(user->age, 1);
+				else
+					agesDic[user->age] += 1;
+			}
+
+			userTypeChart->Series[0]->Points->AddXY(0, travelersCount);
+			userTypeChart->Series[1]->Points->AddXY(0, hostCount);
+
+			ageChart->Series[0]->Points->DataBindXY(agesDic->Keys, agesDic->Values);
+
+			int prices[] = { 500, 1000, 1500, 2000, 3000 };
+			auto priceDic = gcnew System::Collections::Generic::Dictionary<Int32, Int32>();
+
+			for (auto priceKey : prices)
+				priceDic->Add(priceKey, 0);
+
+			for (Apartment* apartment : *Global::Apartments->getValues()) {
+
+				for (auto priceKey : prices) {
+
+					if (apartment->price < priceKey)
+						priceDic[priceKey] += 1;
+				}
+			}
+
+			apartmentPricesChart->Series[0]->Points->DataBindXY(priceDic->Keys, priceDic->Values);
+
+			totalUsersLabel->Text = "" + (travelersCount + hostCount);
+			totalUsersLabel->Text = "" + (travelersCount + hostCount);
+
+			totalApartmentsLabel->Text = "" + Global::Apartments->getValues()->size();
+			bookedApartmentsLabel->Text = "" + Global::BookedApartments->getValues()->size();
+
+			double moneySpent = 0;
+
+			for (BookedApartment* bookedApartment : *Global::BookedApartments->getValues()) {
+				moneySpent += bookedApartment->CalculateTotalPrice();
+			}
+
+			moneySpentLabel->Text = "" + moneySpent + " EGP";
+		}
 		AdminPanel(void)
 		{
 			InitializeComponent();
@@ -44,6 +103,8 @@ namespace AirbnbGUI {
 			userDataGrid->DataSource = userDataSource;
 			apartmentDataGridView->DataSource = apartmentDataSource;
 			bookedApartmentDataGridView->DataSource = bookedApartmentDataSource;
+
+			updateCharts();
 		}
 
 	protected:
@@ -77,6 +138,21 @@ namespace AirbnbGUI {
 		private: System::Windows::Forms::Button^ button3;
 		private: System::Windows::Forms::Button^ button2;
 		private: System::Windows::Forms::Button^ button4;
+		private: System::Windows::Forms::DataVisualization::Charting::Chart^ userTypeChart;
+		private: System::Windows::Forms::DataVisualization::Charting::Chart^ ageChart;
+		private: System::Windows::Forms::DataVisualization::Charting::Chart^ apartmentPricesChart;
+		private: System::Windows::Forms::Label^ totalUsersLabel;
+		private: System::Windows::Forms::Label^ totalApartmentsLabel;
+		private: System::Windows::Forms::Label^ bookedApartmentsLabel;
+		private: System::Windows::Forms::Label^ moneySpentLabel;
+	private: System::Windows::Forms::Label^ label4;
+		private: System::Windows::Forms::Label^ label3;
+		private: System::Windows::Forms::Label^ label2;
+		private: System::Windows::Forms::Label^ label1;
+
+
+
+
 
 	private:
 		/// <summary>
@@ -91,8 +167,29 @@ namespace AirbnbGUI {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea7 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^ legend7 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^ series9 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea8 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^ legend8 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^ series10 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea9 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^ legend9 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^ series11 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^ series12 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->moneySpentLabel = (gcnew System::Windows::Forms::Label());
+			this->bookedApartmentsLabel = (gcnew System::Windows::Forms::Label());
+			this->totalApartmentsLabel = (gcnew System::Windows::Forms::Label());
+			this->totalUsersLabel = (gcnew System::Windows::Forms::Label());
+			this->apartmentPricesChart = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->ageChart = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->userTypeChart = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->userDataGrid = (gcnew System::Windows::Forms::DataGridView());
@@ -104,6 +201,10 @@ namespace AirbnbGUI {
 			this->bookedApartmentDataGridView = (gcnew System::Windows::Forms::DataGridView());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->tabControl1->SuspendLayout();
+			this->tabPage4->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->apartmentPricesChart))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ageChart))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->userTypeChart))->BeginInit();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->userDataGrid))->BeginInit();
 			this->tabPage2->SuspendLayout();
@@ -126,9 +227,21 @@ namespace AirbnbGUI {
 			this->tabControl1->SelectedIndex = 0;
 			this->tabControl1->Size = System::Drawing::Size(801, 632);
 			this->tabControl1->TabIndex = 0;
+			this->tabControl1->SelectedIndexChanged += gcnew System::EventHandler(this, &AdminPanel::tabControl1_SelectedIndexChanged);
 			// 
 			// tabPage4
 			// 
+			this->tabPage4->Controls->Add(this->label4);
+			this->tabPage4->Controls->Add(this->label3);
+			this->tabPage4->Controls->Add(this->label2);
+			this->tabPage4->Controls->Add(this->label1);
+			this->tabPage4->Controls->Add(this->moneySpentLabel);
+			this->tabPage4->Controls->Add(this->bookedApartmentsLabel);
+			this->tabPage4->Controls->Add(this->totalApartmentsLabel);
+			this->tabPage4->Controls->Add(this->totalUsersLabel);
+			this->tabPage4->Controls->Add(this->apartmentPricesChart);
+			this->tabPage4->Controls->Add(this->ageChart);
+			this->tabPage4->Controls->Add(this->userTypeChart);
 			this->tabPage4->Location = System::Drawing::Point(4, 25);
 			this->tabPage4->Name = L"tabPage4";
 			this->tabPage4->Padding = System::Windows::Forms::Padding(3);
@@ -136,6 +249,154 @@ namespace AirbnbGUI {
 			this->tabPage4->TabIndex = 3;
 			this->tabPage4->Text = L"Analysis";
 			this->tabPage4->UseVisualStyleBackColor = true;
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label4->Location = System::Drawing::Point(457, 450);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(127, 24);
+			this->label4->TabIndex = 10;
+			this->label4->Text = L"Money spent:";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label3->Location = System::Drawing::Point(457, 411);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(183, 24);
+			this->label3->TabIndex = 9;
+			this->label3->Text = L"Booked apartments:";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label2->Location = System::Drawing::Point(457, 372);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(211, 24);
+			this->label2->TabIndex = 8;
+			this->label2->Text = L"Registered apartments:";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->Location = System::Drawing::Point(457, 336);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(106, 24);
+			this->label1->TabIndex = 7;
+			this->label1->Text = L"Total users:";
+			// 
+			// moneySpentLabel
+			// 
+			this->moneySpentLabel->AutoSize = true;
+			this->moneySpentLabel->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->moneySpentLabel->Location = System::Drawing::Point(619, 450);
+			this->moneySpentLabel->Name = L"moneySpentLabel";
+			this->moneySpentLabel->Size = System::Drawing::Size(21, 24);
+			this->moneySpentLabel->TabIndex = 6;
+			this->moneySpentLabel->Text = L"0";
+			// 
+			// bookedApartmentsLabel
+			// 
+			this->bookedApartmentsLabel->AutoSize = true;
+			this->bookedApartmentsLabel->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->bookedApartmentsLabel->Location = System::Drawing::Point(680, 411);
+			this->bookedApartmentsLabel->Name = L"bookedApartmentsLabel";
+			this->bookedApartmentsLabel->Size = System::Drawing::Size(21, 24);
+			this->bookedApartmentsLabel->TabIndex = 5;
+			this->bookedApartmentsLabel->Text = L"0";
+			// 
+			// totalApartmentsLabel
+			// 
+			this->totalApartmentsLabel->AutoSize = true;
+			this->totalApartmentsLabel->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->totalApartmentsLabel->Location = System::Drawing::Point(707, 372);
+			this->totalApartmentsLabel->Name = L"totalApartmentsLabel";
+			this->totalApartmentsLabel->Size = System::Drawing::Size(21, 24);
+			this->totalApartmentsLabel->TabIndex = 4;
+			this->totalApartmentsLabel->Text = L"0";
+			// 
+			// totalUsersLabel
+			// 
+			this->totalUsersLabel->AutoSize = true;
+			this->totalUsersLabel->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->totalUsersLabel->Location = System::Drawing::Point(590, 336);
+			this->totalUsersLabel->Name = L"totalUsersLabel";
+			this->totalUsersLabel->Size = System::Drawing::Size(21, 24);
+			this->totalUsersLabel->TabIndex = 3;
+			this->totalUsersLabel->Text = L"0";
+			// 
+			// apartmentPricesChart
+			// 
+			chartArea7->Name = L"ChartArea1";
+			this->apartmentPricesChart->ChartAreas->Add(chartArea7);
+			legend7->Name = L"Legend1";
+			this->apartmentPricesChart->Legends->Add(legend7);
+			this->apartmentPricesChart->Location = System::Drawing::Point(6, 295);
+			this->apartmentPricesChart->Name = L"apartmentPricesChart";
+			series9->ChartArea = L"ChartArea1";
+			series9->LabelForeColor = System::Drawing::Color::Transparent;
+			series9->Legend = L"Legend1";
+			series9->Name = L"Price";
+			series9->XValueType = System::Windows::Forms::DataVisualization::Charting::ChartValueType::String;
+			series9->YValueType = System::Windows::Forms::DataVisualization::Charting::ChartValueType::Int32;
+			this->apartmentPricesChart->Series->Add(series9);
+			this->apartmentPricesChart->Size = System::Drawing::Size(398, 305);
+			this->apartmentPricesChart->TabIndex = 2;
+			// 
+			// ageChart
+			// 
+			chartArea8->Name = L"ChartArea1";
+			this->ageChart->ChartAreas->Add(chartArea8);
+			legend8->Name = L"Legend1";
+			this->ageChart->Legends->Add(legend8);
+			this->ageChart->Location = System::Drawing::Point(410, 6);
+			this->ageChart->Name = L"ageChart";
+			series10->ChartArea = L"ChartArea1";
+			series10->LabelForeColor = System::Drawing::Color::Transparent;
+			series10->Legend = L"Legend1";
+			series10->Name = L"Age";
+			series10->XValueType = System::Windows::Forms::DataVisualization::Charting::ChartValueType::String;
+			series10->YValueType = System::Windows::Forms::DataVisualization::Charting::ChartValueType::Int32;
+			this->ageChart->Series->Add(series10);
+			this->ageChart->Size = System::Drawing::Size(380, 290);
+			this->ageChart->TabIndex = 1;
+			// 
+			// userTypeChart
+			// 
+			chartArea9->Name = L"ChartArea1";
+			this->userTypeChart->ChartAreas->Add(chartArea9);
+			legend9->Name = L"Legend1";
+			this->userTypeChart->Legends->Add(legend9);
+			this->userTypeChart->Location = System::Drawing::Point(6, 6);
+			this->userTypeChart->Name = L"userTypeChart";
+			series11->ChartArea = L"ChartArea1";
+			series11->LabelForeColor = System::Drawing::Color::Transparent;
+			series11->Legend = L"Legend1";
+			series11->Name = L"Traveler";
+			series11->XValueType = System::Windows::Forms::DataVisualization::Charting::ChartValueType::String;
+			series11->YValueType = System::Windows::Forms::DataVisualization::Charting::ChartValueType::Int32;
+			series12->ChartArea = L"ChartArea1";
+			series12->Legend = L"Legend1";
+			series12->Name = L"Hosts";
+			series12->XValueType = System::Windows::Forms::DataVisualization::Charting::ChartValueType::String;
+			series12->YValueType = System::Windows::Forms::DataVisualization::Charting::ChartValueType::Int32;
+			this->userTypeChart->Series->Add(series11);
+			this->userTypeChart->Series->Add(series12);
+			this->userTypeChart->Size = System::Drawing::Size(398, 283);
+			this->userTypeChart->TabIndex = 0;
 			// 
 			// tabPage1
 			// 
@@ -269,6 +530,11 @@ namespace AirbnbGUI {
 			this->Name = L"AdminPanel";
 			this->Text = L"Admin Dashboard";
 			this->tabControl1->ResumeLayout(false);
+			this->tabPage4->ResumeLayout(false);
+			this->tabPage4->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->apartmentPricesChart))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ageChart))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->userTypeChart))->EndInit();
 			this->tabPage1->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->userDataGrid))->EndInit();
 			this->tabPage2->ResumeLayout(false);
@@ -341,6 +607,12 @@ namespace AirbnbGUI {
 
 			bookedApartmentDataGridView->Rows->Remove(row);
 		}
+	}
+
+	private: System::Void tabControl1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+
+		if (tabControl1->SelectedIndex == 0)
+			updateCharts();
 	}
 };
 }

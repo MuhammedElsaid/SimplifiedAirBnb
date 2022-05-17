@@ -1,0 +1,5 @@
+ApartmentId=9
+BookingId=23
+NumberOfDays=5
+StartDate=17/05/2022
+-

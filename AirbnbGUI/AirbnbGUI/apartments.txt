@@ -1,14 +1,12 @@
 Address=Cairo
 AvailableRooms=9
-BookedIDs=
 Capacity=5000.000000
 City=Alex
 ID=9
-Price=2000.000000
+Price=5000.000000
 -
 Address=AAAAAAAAAAAAAAA
 AvailableRooms=5
-BookedIDs=
 Capacity=250.000000
 City=Alex
 ID=21

@@ -347,7 +347,7 @@ namespace AirbnbGUI {
 		for (auto apartment : currentResult) {
 
 			if (counter == searchListView->SelectedIndices[0]) {
-				auto numberOfDays = (endDateBox->Value - startDateBox->Value).Days;
+				auto numberOfDays = (DateTime::ParseExact(endDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr) - DateTime::ParseExact(startDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr)).Days;
 				auto bookedApartment = new BookedApartment(apartment->ID, marshal_as<std::string>(startDateBox->Value.ToString("dd/MM/yyyy")), numberOfDays);
 				Global::BookedApartments->Push(bookedApartment);
 				Global::BookedApartments->Save();

@@ -1,12 +1,12 @@
 Age=23
-Email=mohamed@gmail.com
+Email=admin@example.com
 FullName=Muhammed
 Gender=Male
 ID=7
 UserType=2
 -
 Age=20
-Email=mohamed@example.com
+Email=host@example.com
 FullName=Muhammed
 Gender=Male
 ID=14
@@ -14,8 +14,8 @@ OwnedApartments=21,
 UserType=1
 -
 Age=22
-BookedIds=
-Email=ahmed@example.com
+BookedIds=23,23,
+Email=traveler@example.com
 FullName=Ahmed
 Gender=Male
 ID=16
