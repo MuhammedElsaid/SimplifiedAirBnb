@@ -1,10 +1,3 @@
-Address=Cairo
-AvailableRooms=9
-Capacity=5000.000000
-City=Alex
-ID=9
-Price=5000.000000
--
 Address=AAAAAAAAAAAAAAA
 AvailableRooms=5
 Capacity=250.000000

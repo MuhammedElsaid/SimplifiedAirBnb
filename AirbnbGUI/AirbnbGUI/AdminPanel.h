@@ -42,9 +42,13 @@ namespace AirbnbGUI {
 					agesDic[user->age] += 1;
 			}
 
+			userTypeChart->Series[0]->Points->Clear();
+			userTypeChart->Series[1]->Points->Clear();
+
 			userTypeChart->Series[0]->Points->AddXY(0, travelersCount);
 			userTypeChart->Series[1]->Points->AddXY(0, hostCount);
 
+			ageChart->Series[0]->Points->Clear();
 			ageChart->Series[0]->Points->DataBindXY(agesDic->Keys, agesDic->Values);
 
 			int prices[] = { 500, 1000, 1500, 2000, 3000 };
@@ -77,6 +81,7 @@ namespace AirbnbGUI {
 				}
 			}
 
+			apartmentPricesChart->Series[0]->Points->Clear();
 			apartmentPricesChart->Series[0]->Points->DataBindXY(priceDic->Keys, priceDic->Values);
 
 			totalUsersLabel->Text = "" + (travelersCount + hostCount);
@@ -121,15 +126,15 @@ namespace AirbnbGUI {
 			bookedApartmentDataGridView->DataSource = bookedApartmentDataSource;
 
 
-			//try {
-			//	updateCharts();
-			//
-			//}
-			//catch (System::Exception^ ex) {
-			//
-			//	System::Windows::Forms::MessageBox::Show(ex->Message);
-			//
-			//}
+			try {
+				updateCharts();
+			
+			}
+			catch (System::Exception^ ex) {
+			
+				System::Windows::Forms::MessageBox::Show(ex->Message);
+			
+			}
 		}
 
 	protected:

@@ -14,7 +14,7 @@ OwnedApartments=21,
 UserType=1
 -
 Age=22
-BookedIds=23,25,
+BookedIds=23,
 Email=traveler@example.com
 FullName=Ahmed
 Gender=Male
