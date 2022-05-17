@@ -306,28 +306,30 @@ namespace AirbnbGUI {
 			auto tempResult = currentResult;
 
 			for (auto foundApartment : currentResult) {
-
+			
 				for (BookedApartment* bookedApartment : *Global::BookedApartments->getValues()) {
-
+			
 					if (foundApartment->ID == bookedApartment->apartmentID) {
-
+			
 						auto dateParse = DateTime::ParseExact(gcnew String(bookedApartment->startDate.c_str()), "dd/MM/yyyy", nullptr);
 						auto endDateParse = dateParse.AddDays(bookedApartment->numberOfDays);
-
+			
 						auto startDate = DateTime::ParseExact(startDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr);
 						auto endDate = DateTime::ParseExact(endDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr);
-
+			
 						if (dateParse <= startDate && startDate >= endDateParse
 							|| dateParse <= endDate && endDate >= endDateParse) {
-
+			
 							tempResult.remove(foundApartment);
 							continue;
 						}
 					}
 				}
+			}
 
-				currentResult = tempResult;
+			currentResult = tempResult;
 
+			for (auto foundApartment : currentResult) {
 				auto arr = gcnew array<String^>(4);
 
 				arr[0] = gcnew String(foundApartment->city.c_str());
@@ -336,6 +338,7 @@ namespace AirbnbGUI {
 				arr[3] = gcnew String(std::to_string(foundApartment->availableRooms).c_str());
 				searchListView->Items->Add(gcnew ListViewItem(arr));
 			}
+			
 
 		}
 	private: System::Void searchListView_MouseDoubleClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
