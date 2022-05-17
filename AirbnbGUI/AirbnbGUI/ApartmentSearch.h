@@ -1,5 +1,6 @@
 #pragma once
 #include <msclr\marshal_cppstd.h>
+#include "UserInfo.h"
 
 namespace AirbnbGUI {
 
@@ -245,6 +246,7 @@ namespace AirbnbGUI {
 			this->linkLabel1->TabIndex = 26;
 			this->linkLabel1->TabStop = true;
 			this->linkLabel1->Text = L"My booked apartments";
+			this->linkLabel1->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &ApartmentSearch::linkLabel1_LinkClicked);
 			// 
 			// ApartmentSearch
 			// 
@@ -312,7 +314,11 @@ namespace AirbnbGUI {
 						auto dateParse = DateTime::ParseExact(gcnew String(bookedApartment->startDate.c_str()), "dd/MM/yyyy", nullptr);
 						auto endDateParse = dateParse.AddDays(bookedApartment->numberOfDays);
 
-						if (dateParse <= startDateBox->Value && endDateParse >= endDateBox->Value) {
+						auto startDate = DateTime::ParseExact(startDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr);
+						auto endDate = DateTime::ParseExact(endDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr);
+
+						if (dateParse <= startDate && startDate >= endDateParse
+							|| dateParse <= endDate && endDate >= endDateParse) {
 
 							tempResult.remove(foundApartment);
 							continue;
@@ -358,6 +364,13 @@ namespace AirbnbGUI {
 
 			counter++;
 		}
+	}
+	private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+
+		this->Hide();
+
+		auto userInfo = gcnew UserInfo();
+		userInfo->Show();
 	}
 };
 }
