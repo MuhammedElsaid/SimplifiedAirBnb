@@ -24,6 +24,7 @@ namespace AirbnbGUI {
 		ApartmentSearch(void)
 		{
 			InitializeComponent();
+			this->Icon = gcnew System::Drawing::Icon("Airbnb_Icon.ico");
 
 			this->Text = "Welcome " + gcnew String(Global::Users->currentSignedInUser->fullName.c_str());
 			searchListView->View = View::Details;
@@ -32,7 +33,7 @@ namespace AirbnbGUI {
 			searchListView->Columns->Add("City", 90);
 			searchListView->Columns->Add("Address", 150);
 			searchListView->Columns->Add("Price", 90);
-			searchListView->Columns->Add("Number of rooms", 90);
+			searchListView->Columns->Add("Number of rooms", 120);
 			//
 			//TODO: Add the constructor code here
 			//

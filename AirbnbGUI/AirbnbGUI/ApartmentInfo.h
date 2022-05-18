@@ -18,6 +18,8 @@ namespace AirbnbGUI {
 		ApartmentInfo(void)
 		{
 			InitializeComponent();
+			this->Icon = gcnew System::Drawing::Icon("Airbnb_Icon.ico");
+
 			//
 			//TODO: Add the constructor code here
 			//
@@ -119,7 +121,6 @@ namespace AirbnbGUI {
 			// 
 			// pictureBox1
 			// 
-			this->pictureBox1->Anchor = System::Windows::Forms::AnchorStyles::Top;
 			this->pictureBox1->ImageLocation = L"Airbnb_Logo.png";
 			this->pictureBox1->Location = System::Drawing::Point(15, 12);
 			this->pictureBox1->Name = L"pictureBox1";
@@ -210,8 +211,7 @@ namespace AirbnbGUI {
 			// 
 			// capacityBox
 			// 
-			this->capacityBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
+			this->capacityBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->capacityBox->Location = System::Drawing::Point(351, 259);
 			this->capacityBox->Name = L"capacityBox";
 			this->capacityBox->ReadOnly = true;
@@ -220,8 +220,7 @@ namespace AirbnbGUI {
 			// 
 			// priceBox
 			// 
-			this->priceBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
+			this->priceBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->priceBox->Location = System::Drawing::Point(477, 257);
 			this->priceBox->Name = L"priceBox";
 			this->priceBox->ReadOnly = true;
@@ -230,8 +229,7 @@ namespace AirbnbGUI {
 			// 
 			// availableRoomsBox
 			// 
-			this->availableRoomsBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
+			this->availableRoomsBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->availableRoomsBox->Location = System::Drawing::Point(595, 256);
 			this->availableRoomsBox->Name = L"availableRoomsBox";
 			this->availableRoomsBox->ReadOnly = true;
@@ -240,6 +238,7 @@ namespace AirbnbGUI {
 			// 
 			// label7
 			// 
+			this->label7->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->label7->AutoSize = true;
 			this->label7->Location = System::Drawing::Point(349, 294);
 			this->label7->Name = L"label7";
@@ -249,6 +248,7 @@ namespace AirbnbGUI {
 			// 
 			// label8
 			// 
+			this->label8->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->label8->AutoSize = true;
 			this->label8->Location = System::Drawing::Point(348, 345);
 			this->label8->Name = L"label8";
@@ -258,8 +258,7 @@ namespace AirbnbGUI {
 			// 
 			// startDateBox
 			// 
-			this->startDateBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
+			this->startDateBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->startDateBox->Location = System::Drawing::Point(351, 313);
 			this->startDateBox->Name = L"startDateBox";
 			this->startDateBox->ReadOnly = true;
@@ -268,8 +267,7 @@ namespace AirbnbGUI {
 			// 
 			// endDateBox
 			// 
-			this->endDateBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
+			this->endDateBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->endDateBox->Location = System::Drawing::Point(351, 364);
 			this->endDateBox->Name = L"endDateBox";
 			this->endDateBox->ReadOnly = true;

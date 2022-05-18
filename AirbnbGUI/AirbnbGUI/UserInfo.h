@@ -19,6 +19,7 @@ namespace AirbnbGUI {
 		UserInfo(void)
 		{
 			InitializeComponent();
+			this->Icon = gcnew System::Drawing::Icon("Airbnb_Icon.ico");
 
 			listview->View = View::Details;
 			listview->FullRowSelect = true;

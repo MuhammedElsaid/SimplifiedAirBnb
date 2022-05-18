@@ -29,6 +29,8 @@ namespace AirbnbGUI {
 		SigninForm(void) {
 
 			InitializeComponent();
+
+			this->Icon = gcnew System::Drawing::Icon("Airbnb_Icon.ico");
 		}
 
 		

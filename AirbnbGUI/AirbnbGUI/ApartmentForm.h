@@ -24,6 +24,7 @@ namespace AirbnbGUI {
 		ApartmentForm(void)
 		{
 			InitializeComponent();
+			this->Icon = gcnew System::Drawing::Icon("Airbnb_Icon.ico");
 			//
 			//TODO: Add the constructor code here
 			//
