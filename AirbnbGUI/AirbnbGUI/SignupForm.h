@@ -125,6 +125,8 @@ namespace AirbnbGUI {
 			// 
 			// accountTypeCombobox
 			// 
+			this->accountTypeCombobox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->accountTypeCombobox->DisplayMember = L"Traveler";
 			this->accountTypeCombobox->FormattingEnabled = true;
 			this->accountTypeCombobox->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Traveler", L"Host" });
@@ -135,7 +137,7 @@ namespace AirbnbGUI {
 			// 
 			// backButton
 			// 
-			this->backButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->backButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->backButton->Location = System::Drawing::Point(13, 615);
 			this->backButton->Name = L"backButton";
 			this->backButton->Size = System::Drawing::Size(102, 35);
@@ -216,6 +218,8 @@ namespace AirbnbGUI {
 			// 
 			// genderComboBox
 			// 
+			this->genderComboBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->genderComboBox->FormattingEnabled = true;
 			this->genderComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Male", L"Female" });
 			this->genderComboBox->Location = System::Drawing::Point(40, 411);
@@ -265,6 +269,7 @@ namespace AirbnbGUI {
 			// 
 			// label7
 			// 
+			this->label7->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->label7->AutoSize = true;
 			this->label7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8));
 			this->label7->Location = System::Drawing::Point(176, 391);
@@ -275,6 +280,7 @@ namespace AirbnbGUI {
 			// 
 			// ageNumBox
 			// 
+			this->ageNumBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->ageNumBox->Location = System::Drawing::Point(179, 411);
 			this->ageNumBox->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 16, 0, 0, 0 });
 			this->ageNumBox->Name = L"ageNumBox";
