@@ -235,6 +235,7 @@ namespace AirbnbGUI {
 			// 
 			// myApartmentsLinkLabel
 			// 
+			this->myApartmentsLinkLabel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->myApartmentsLinkLabel->AutoSize = true;
 			this->myApartmentsLinkLabel->Location = System::Drawing::Point(632, 9);
 			this->myApartmentsLinkLabel->Name = L"myApartmentsLinkLabel";
