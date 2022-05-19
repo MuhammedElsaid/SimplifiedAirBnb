@@ -16,10 +16,6 @@ public:
 	Apartment(DataItem* dataItem);
 	Apartment(std::string address, std::string city, int availableRooms, double capacity, double price);
 
-	static const std::list<Apartment*>& searchByPrice(double givenPrice);
-	static const std::list<Apartment*>& searchByCity(std::string givenCity);
-	static const std::list<Apartment*>& getApartments();
-
 	std::string address;
 	std::string city;
 	int availableRooms;

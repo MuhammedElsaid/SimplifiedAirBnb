@@ -285,10 +285,11 @@ namespace AirbnbGUI {
 
 			Apartment* apartment = new Apartment(addressStr, cityStr, availableRooms, capacity, price);
 
-			Host* signedInHost = (Host*)Global::Users->currentSignedInUser;
 
 			Global::Apartments->Push(apartment);
 			Global::Apartments->Save();
+
+			Host* signedInHost = (Host*)Global::Users->currentSignedInUser;
 
 			signedInHost->ownedApartmentsIds.push_back(apartment->ID);
 			Global::Users->Save();
@@ -301,6 +302,7 @@ namespace AirbnbGUI {
 
 			cityTextBox->Focus();
 		}
+
 	private: System::Void myApartmentsLinkLabel_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
 
 		this->Hide();
