@@ -32,8 +32,6 @@ public:
 	User(std::string fullName, std::string email, std::string gender, int age);
 
 	DataItem* Serialize() override;
-
-	virtual bool haveAccess() { return false; }
 };
 
 class UserKey : public Serializable
@@ -88,10 +86,5 @@ public:
 	Administrator(DataItem* dataItem);
 	Administrator(User user) : User(user) {
 		userType = UserType::Admin;
-	}
-
-	bool haveAccess() override {
-
-		return true;
 	}
 };

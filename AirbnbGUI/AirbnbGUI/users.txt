@@ -10,7 +10,7 @@ Email=host@example.com
 FullName=Omar
 Gender=Male
 ID=14
-OwnedApartments=21,
+OwnedApartments=21,3,
 UserType=1
 -
 Age=22
