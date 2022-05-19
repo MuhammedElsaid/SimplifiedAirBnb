@@ -10,7 +10,6 @@ class DataItem;
 class Apartment;
 class BookedApartment;
 
-
 class User : public Serializable
 {
 public:

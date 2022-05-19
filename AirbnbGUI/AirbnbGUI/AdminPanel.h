@@ -31,9 +31,9 @@ namespace AirbnbGUI {
 
 			for (User* user : *Global::Users->getValues()) {
 
-				if ((int)user->userType == User::Traveler)
+				if (user->userType == User::Traveler)
 					travelersCount++;
-				else if ((int)user->userType == User::Host)
+				else if (user->userType == User::Host)
 					hostCount++;
 
 				if (!agesDic->ContainsKey(user->age))
