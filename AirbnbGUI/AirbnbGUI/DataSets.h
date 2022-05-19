@@ -63,10 +63,5 @@ class Global
 	static BookedApartmentDataSet* BookedApartments;
 	static UsersDataSet* Users;
 	static KeyDataSet* Keys;
-
-	static int getNextId();
-
-private:
-	static int currentIdCount;
 };
 

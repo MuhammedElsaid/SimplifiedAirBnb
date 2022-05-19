@@ -20,7 +20,6 @@ public:
 class Serializable
 {
 public:
-
 	Serializable();
 	int ID;
 	virtual DataItem* Serialize();
@@ -47,6 +46,7 @@ public:
 
 	void Push(T* item) {
 		values.push_back(item);
+		item->ID = values.size() + 1;
 	}
 	
 	//Loading data set from the path
@@ -127,7 +127,7 @@ protected:
 
 		std::string currentLine;
 
-		DataItem* currentDataItem = new DataItem();
+		auto currentDataItem = new DataItem();
 
 		while (std::getline(fileStream, currentLine)) {
 			if (currentLine == "-") {

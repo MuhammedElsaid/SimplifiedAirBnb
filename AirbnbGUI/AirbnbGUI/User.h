@@ -36,7 +36,7 @@ public:
 	virtual bool haveAccess() { return false; }
 };
 
-class UserKey : Serializable
+class UserKey : public Serializable
 {
 public:
 

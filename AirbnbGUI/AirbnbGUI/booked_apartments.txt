@@ -18,3 +18,8 @@ BookingId=28
 NumberOfDays=2
 StartDate=25/05/2022
 -
+ApartmentId=21
+BookingId=6
+NumberOfDays=1
+StartDate=29/05/2022
+-

@@ -37,7 +37,6 @@ DataItem* Apartment::Serialize() {
 
 Serializable::Serializable()
 {
-	this->ID = Global::getNextId();
 }
 
 DataItem* Serializable::Serialize() {
@@ -54,8 +53,6 @@ BookedApartment::BookedApartment(DataItem* dataItem) {
 
 BookedApartment::BookedApartment(int Id, std::string startDate, int numberOfDays)
 {
-	this->ID = Global::getNextId();
-
 	this->apartmentID = Id;
 	this->startDate = startDate;
 	this->numberOfDays = numberOfDays;
