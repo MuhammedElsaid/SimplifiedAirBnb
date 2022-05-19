@@ -27,7 +27,7 @@ namespace AirbnbGUI {
 			this->DialogResult = System::Windows::Forms::DialogResult::Abort;
 		}
 
-		ApartmentInfo(String^ startDate, String^ endDate, Apartment* apartmentInfo) {
+		ApartmentInfo(String^ startDate, String^ endDate, double cost, Apartment* apartmentInfo) {
 			InitializeComponent();
 
 			this->DialogResult = System::Windows::Forms::DialogResult::Abort;
@@ -40,6 +40,7 @@ namespace AirbnbGUI {
 			priceBox->Text = gcnew String(std::to_string(apartmentInfo->price).c_str());
 			capacityBox->Text = gcnew String(std::to_string(apartmentInfo->capacity).c_str());
 			availableRoomsBox->Text = gcnew String(std::to_string(apartmentInfo->availableRooms).c_str());
+			totalPriceLabel->Text = gcnew String(std::to_string((int)cost).c_str()) + " EGP";
 		}
 
 	protected:
@@ -55,9 +56,6 @@ namespace AirbnbGUI {
 		}
 		private: System::Windows::Forms::PictureBox^ pictureBox1;
 		private: System::Windows::Forms::Button^ bookButton;
-
-
-
 
 
 		private: System::Windows::Forms::Label^ label6;
@@ -82,6 +80,8 @@ namespace AirbnbGUI {
 
 
 		private: System::Windows::Forms::Label^ label1;
+		private: System::Windows::Forms::Label^ label9;
+		private: System::Windows::Forms::Label^ totalPriceLabel;
 
 
 		protected:
@@ -116,6 +116,8 @@ namespace AirbnbGUI {
 			this->startDateBox = (gcnew System::Windows::Forms::TextBox());
 			this->endDateBox = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->totalPriceLabel = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -132,7 +134,7 @@ namespace AirbnbGUI {
 			// bookButton
 			// 
 			this->bookButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-			this->bookButton->Location = System::Drawing::Point(581, 422);
+			this->bookButton->Location = System::Drawing::Point(581, 491);
 			this->bookButton->Name = L"bookButton";
 			this->bookButton->Size = System::Drawing::Size(126, 37);
 			this->bookButton->TabIndex = 15;
@@ -284,11 +286,33 @@ namespace AirbnbGUI {
 			this->label1->TabIndex = 38;
 			this->label1->Text = L"Apartment info:";
 			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10));
+			this->label9->Location = System::Drawing::Point(12, 445);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(98, 20);
+			this->label9->TabIndex = 39;
+			this->label9->Text = L"Total price: ";
+			// 
+			// totalPriceLabel
+			// 
+			this->totalPriceLabel->AutoSize = true;
+			this->totalPriceLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10));
+			this->totalPriceLabel->Location = System::Drawing::Point(117, 445);
+			this->totalPriceLabel->Name = L"totalPriceLabel";
+			this->totalPriceLabel->Size = System::Drawing::Size(18, 20);
+			this->totalPriceLabel->TabIndex = 40;
+			this->totalPriceLabel->Text = L"0";
+			// 
 			// ApartmentInfo
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(719, 471);
+			this->ClientSize = System::Drawing::Size(719, 540);
+			this->Controls->Add(this->totalPriceLabel);
+			this->Controls->Add(this->label9);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->endDateBox);
 			this->Controls->Add(this->startDateBox);

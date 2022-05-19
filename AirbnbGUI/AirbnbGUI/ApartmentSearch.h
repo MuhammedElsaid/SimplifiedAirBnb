@@ -353,7 +353,7 @@ namespace AirbnbGUI {
 				
 				auto numberOfDays = (DateTime::ParseExact(endDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr) - DateTime::ParseExact(startDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr)).Days;
 				
-				ApartmentInfo^ apartmentInfo = gcnew ApartmentInfo(startDateBox->Value.ToString("dd/MM/yyyy"), endDateBox->Value.ToString("dd/MM/yyyy"), apartment);
+				ApartmentInfo^ apartmentInfo = gcnew ApartmentInfo(startDateBox->Value.ToString("dd/MM/yyyy"), endDateBox->Value.ToString("dd/MM/yyyy"), numberOfDays * apartment->price,apartment);
 				auto result = apartmentInfo->ShowDialog();
 
 				if (result != System::Windows::Forms::DialogResult::OK)

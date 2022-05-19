@@ -33,21 +33,33 @@ namespace AirbnbGUI {
 
 
 			if (user->userType == User::Traveler) {
+
+				listview->Columns->Add("Start date", 100);
+				listview->Columns->Add("Number of days", 100);
+
 				auto traveler = (Traveler*)user;
+
+				double totalCost = 0;
 
 				fullNameLabel->Text = "Booked Apartments";
 
 				for (auto bookedApartment : traveler->getBookedApartments()) {
 
-					auto arr = gcnew array<String^>(4);
+					auto arr = gcnew array<String^>(6);
 					auto foundApartment = bookedApartment->getApartment();
+
+					totalCost += bookedApartment->numberOfDays * foundApartment->price;
 
 					arr[0] = gcnew String(foundApartment->city.c_str());
 					arr[1] = gcnew String(foundApartment->address.c_str());
-					arr[2] = gcnew String(std::to_string((int)foundApartment->price).c_str());
+					arr[2] = gcnew String(std::to_string((int)foundApartment->price * bookedApartment->numberOfDays).c_str());
 					arr[3] = gcnew String(std::to_string(foundApartment->availableRooms).c_str());
+					arr[4] = gcnew String(bookedApartment->startDate.c_str());
+					arr[5] = gcnew String(std::to_string(bookedApartment->numberOfDays).c_str());
 					listview->Items->Add(gcnew ListViewItem(arr));
 				}
+
+				fullNameLabel->Text += " Total Price: " + totalCost;
 			}
 			else {
 
