@@ -287,11 +287,11 @@ namespace AirbnbGUI {
 
 			Host* signedInHost = (Host*)Global::Users->currentSignedInUser;
 
-			signedInHost->ownedApartmentsIds.push_back(apartment->ID);
-			Global::Users->Save();
-
 			Global::Apartments->Push(apartment);
 			Global::Apartments->Save();
+
+			signedInHost->ownedApartmentsIds.push_back(apartment->ID);
+			Global::Users->Save();
 
 			cityTextBox->Clear();
 			addressBox->Clear();
