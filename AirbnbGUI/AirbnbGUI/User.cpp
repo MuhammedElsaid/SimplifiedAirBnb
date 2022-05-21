@@ -39,8 +39,10 @@ std::list<Apartment*> Host::getOwnedApartments()
 	for (auto apartmentId : ownedApartmentsIds)
 		for (auto apartment : *Global::Apartments->getValues()) {
 
-			if (apartmentId == apartment->ID)
+			if (apartmentId == apartment->ID) {
 				ownedApartments.push_back(apartment);
+				break;
+			}
 		}
 
 	return ownedApartments;
@@ -92,8 +94,10 @@ std::list<BookedApartment*> Traveler::getBookedApartments()
 	for (auto bookedApartmentId : bookedApartmentIds)
 		for (auto bookedApartment : *Global::BookedApartments->getValues()) {
 
-			if (bookedApartmentId == bookedApartment->ID)
+			if (bookedApartmentId == bookedApartment->ID) {
 				bookedApartments.push_back(bookedApartment);
+				break;
+			}
 		}
 
 	return bookedApartments;

@@ -231,6 +231,7 @@ namespace AirbnbGUI {
 				for (auto user : Global::Users->loadValues()) {
 					if (user->ID == std::stoi(result->at("ID"))) {
 						Global::Users->currentSignedInUser = user;
+						break;
 					}
 				}
 

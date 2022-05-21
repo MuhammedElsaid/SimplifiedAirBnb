@@ -370,14 +370,12 @@ namespace AirbnbGUI {
 				new Traveler({ fullNameStr, emailStr, genderStr, age }) :
 				new Host({ fullNameStr, emailStr, genderStr, age });
 			
+			Global::Users->Push(user);
+			Global::Users->Save();
 
 			UserKey* userKey = new UserKey(user->ID, passwordStr);
 			Global::Keys->Push(userKey);
 			Global::Keys->Save();
-
-			Global::Users->Push(user);
-			Global::Users->Save();
-				
 
 			System::Windows::Forms::MessageBox::Show("Account has been created successfully!!");
 			this->Close();

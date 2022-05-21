@@ -45,14 +45,13 @@ public:
 	}
 
 	void Push(T* item) {
+		item->ID = values.size() == 0 ? 0 : values.back()->ID + 1;
 		values.push_back(item);
-		item->ID = values.size() + 1;
 	}
 	
 	//Loading data set from the path
 	DataSet(std::string path) {
 		this->path = path;
-		this->values = loadValues();
 	}
 
 	DataItem* searchForDataItem(DataItem* dataItem) {
