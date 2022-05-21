@@ -199,8 +199,8 @@ namespace AirbnbGUI {
 
 		private: System::Void signInButton_Click(System::Object^ sender, System::EventArgs^ e) {
 
-			auto emailStr = marshal_as<std::string>(emailTextBox->Text);
-			auto passwordStr = marshal_as<std::string>(passwordTextBox->Text->ToLower());
+			auto emailStr = marshal_as<std::string>(emailTextBox->Text->ToLower());
+			auto passwordStr = marshal_as<std::string>(passwordTextBox->Text);
 
 			DataItem* signinInfo = new DataItem;
 			
