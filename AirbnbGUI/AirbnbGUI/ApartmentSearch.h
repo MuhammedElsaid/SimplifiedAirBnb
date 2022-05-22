@@ -237,7 +237,7 @@ namespace AirbnbGUI {
 			this->searchButton->TabIndex = 6;
 			this->searchButton->Text = L"Search";
 			this->searchButton->UseVisualStyleBackColor = true;
-			this->searchButton->Click += gcnew System::EventHandler(this, &ApartmentSearch::button1_Click);
+			this->searchButton->Click += gcnew System::EventHandler(this, &ApartmentSearch::searchButton_Click);
 			// 
 			// linkLabel1
 			// 
@@ -282,7 +282,7 @@ namespace AirbnbGUI {
 		}
 #pragma endregion
 
-		private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		private: System::Void searchButton_Click(System::Object^ sender, System::EventArgs^ e) {
 
 			auto cityStr = marshal_as<std::string>(cityTextBox->Text);
 			auto priceStr = marshal_as<std::string>(priceBox->Text);
@@ -291,8 +291,6 @@ namespace AirbnbGUI {
 			auto startDate = marshal_as<std::string>(startDateBox->Value.ToString());
 			auto endDate = marshal_as<std::string>(endDateBox->Value.ToString());
 
-			auto timeSpan = endDateBox->Value - startDateBox->Value;
-			
 			currentResult.clear();
 			searchListView->Items->Clear();
 
@@ -317,8 +315,8 @@ namespace AirbnbGUI {
 						auto dateParse = DateTime::ParseExact(gcnew String(bookedApartment->startDate.c_str()), "dd/MM/yyyy", nullptr);
 						auto endDateParse = dateParse.AddDays(bookedApartment->numberOfDays);
 			
-						auto startDate = DateTime::ParseExact(startDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr);
-						auto endDate = DateTime::ParseExact(endDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr);
+						auto startDate = TrimDate(startDateBox->Value);
+						auto endDate = TrimDate(endDateBox->Value);
 			
 						if (dateParse <= startDate && startDate <= endDateParse
 							|| dateParse <= endDate && endDate <= endDateParse) {
@@ -341,49 +339,52 @@ namespace AirbnbGUI {
 				arr[3] = gcnew String(std::to_string(foundApartment->availableRooms).c_str());
 				searchListView->Items->Add(gcnew ListViewItem(arr));
 			}
-			
-
 		}
-	private: System::Void searchListView_MouseDoubleClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 
-		int counter = 0;
-		for (auto apartment : currentResult) {
+		private: DateTime TrimDate(DateTime datetime) {
+			return DateTime::ParseExact(datetime.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr);
+		}
 
-			if (counter == searchListView->SelectedIndices[0]) {
-				
-				auto numberOfDays = (DateTime::ParseExact(endDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr) - DateTime::ParseExact(startDateBox->Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", nullptr)).Days;
-				
-				ApartmentInfo^ apartmentInfo = gcnew ApartmentInfo(startDateBox->Value.ToString("dd/MM/yyyy"), endDateBox->Value.ToString("dd/MM/yyyy"), numberOfDays * apartment->price,apartment);
-				auto result = apartmentInfo->ShowDialog();
+		private: System::Void searchListView_MouseDoubleClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 
-				if (result != System::Windows::Forms::DialogResult::OK)
+			int counter = 0;
+			for (auto apartment : currentResult) {
+
+				if (counter == searchListView->SelectedIndices[0]) {
+					
+					auto numberOfDays = (TrimDate(endDateBox->Value) - TrimDate(startDateBox->Value)).Days;
+					
+					ApartmentInfo^ apartmentInfo = gcnew ApartmentInfo(startDateBox->Value.ToString("dd/MM/yyyy"), endDateBox->Value.ToString("dd/MM/yyyy"), numberOfDays * apartment->price,apartment);
+					auto result = apartmentInfo->ShowDialog();
+
+					if (result != System::Windows::Forms::DialogResult::OK)
+						return;
+					
+					auto bookedApartment = new BookedApartment(apartment->ID, marshal_as<std::string>(startDateBox->Value.ToString("dd/MM/yyyy")), numberOfDays);
+					
+					Global::BookedApartments->Push(bookedApartment);
+					Global::BookedApartments->Save();
+					
+					currentResult.clear();
+					searchListView->Items->Clear();
+
+					auto traveler = (Traveler*)Global::Users->currentSignedInUser;
+					traveler->bookedApartmentIds.push_back(bookedApartment->ID);
+
+					Global::Users->Save();
 					return;
-				
-				auto bookedApartment = new BookedApartment(apartment->ID, marshal_as<std::string>(startDateBox->Value.ToString("dd/MM/yyyy")), numberOfDays);
-				
-				Global::BookedApartments->Push(bookedApartment);
-				Global::BookedApartments->Save();
-				
-				currentResult.clear();
-				searchListView->Items->Clear();
+				}
 
-				auto traveler = (Traveler*)Global::Users->currentSignedInUser;
-
-				traveler->bookedApartmentIds.push_back(bookedApartment->ID);
-
-				Global::Users->Save();
-				return;
+				counter++;
 			}
-
-			counter++;
 		}
-	}
-	private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
 
-		this->Hide();
+		private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
 
-		auto userInfo = gcnew UserInfo();
-		userInfo->Show();
-	}
+			this->Hide();
+
+			auto userInfo = gcnew UserInfo();
+			userInfo->Show();
+		}
 };
 }

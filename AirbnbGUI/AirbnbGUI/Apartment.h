@@ -12,7 +12,6 @@ class BookedApartment;
 class Apartment : public Serializable
 {
 public:
-
 	Apartment(DataItem* dataItem);
 	Apartment(std::string address, std::string city, int availableRooms, double capacity, double price);
 
